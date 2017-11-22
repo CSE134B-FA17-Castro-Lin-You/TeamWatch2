@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="A roster and statistics management tool for soccer organizations.">
+        <meta name="author" content="Castro-Lin-You">
+        <link rel="icon" href="favicon.ico">
+
+    <title>TeamWatch</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/game-schedule-module.css" rel="stylesheet">
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+    </head>
+    <body class="with-nav">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars fa-lg light"></span>
+          </button>
+          <a class="navbar-brand" href="view-game-schedule.html"><img class="mobile-hidden" src="images/logo.png" alt="teamwatch logo"><img class="desktop-hidden" src="images/logo-small.png" alt="teamwatch logo"></a>
+          <!-- desktop-hidden navbar button -->
+          <a href="add-game.html" class="btn btn-primary desktop-hidden" role="button"><span class="fa fa-calendar-plus-o fa-lg light"></span></a>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="teamstats.html">Team Stats</a>
+              </li>
+              <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Upcoming Matches</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="matchstats.html">Today's Match</a>
+                  <a class="dropdown-item" href="view-game-schedule.html">All Matches <span class="sr-only">(current)</span></a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="record-match-stats.html">Record Match Stats</a>
+              </li>
+              <li class="nav-item desktop-hidden">
+                <a class="nav-link" href="login.html">Log Out</a>
+              </li>
+            </ul>
+            <span class="mobile-hidden light"><a href="login.html" class="btn btn-primary" role="button">Log Out</a></span>
+          </div>
+        </nav>
+
+        <div class="container">
+            <div id="scheduleContainer" class="jumbotron col-xs-1">
+                <h1>Match Schedule</h1>
+                <!-- mobile-hidden add/edit button -->
+                <p><a class="btn btn-primary mobile-hidden" href="add-game.html">Add New Game</a></p>
+
+                <article>
+                  <h2>Previous Game</h2>
+                  <p class=eventField>10/14 Sun at 5:00pm</p>
+                  <p class=eventField>San Diego Petco Park</p>
+                  <p class=eventField>My Team vs Opponent</p>
+                  <p class=eventField>1:1</p>
+                  <p class=eventField>Home Game</p>
+                  <a class="btn btn-primary disabled" href="matchstats.html">View Match Stats</a>
+                  <hr class="scheduleHr">
+                </article>
+
+                <article>
+                  <h2 class=eventField>Today's Game</h2>
+                  <p class=eventField>10/15 Mon at 5:00pm</p>
+                  <p class=eventField>San Diego Petco Park</p>
+                  <p class=eventField>My Team vs Opponent</p>
+                  <p class=eventField>Home Game</p>
+                  <a class="btn btn-primary" href="matchstats.html">View Match Stats</a>
+                  <hr class="scheduleHr">
+                </article>
+
+                <article>
+                  <h2 class=eventField>Upcoming Game</h2>
+                  <p class=eventField>10/16 Tue at 5:00pm</p>
+                  <p class=eventField>San Diego Petco Park</p>
+                  <p class=eventField>My Team vs Opponent</p>
+                  <p class=eventField>Home Game</p>
+                  <a class="btn btn-primary disabled" href="matchstats.html">View Match Stats</a>
+                </article>
+            </div>
+        </div>  
+        
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    </body>
+</html>

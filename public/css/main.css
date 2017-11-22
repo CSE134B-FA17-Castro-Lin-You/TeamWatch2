@@ -1,0 +1,172 @@
+* {
+    color: #333333;
+}
+
+.bg-dark {
+    background-color: #013369 !important;
+}
+
+.jumbotron {
+    background-color: #eeeeee;
+}
+
+form.jumbotron {
+    background-color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #013369;
+    border-color: #013369;
+}
+
+
+/* Show it is fixed to the top */
+body.with-nav {
+  padding-top: 4.5rem;
+}
+
+img.logo{
+    width: 100%;
+    display: block;
+    margin: auto;
+}
+
+/* Start Bryle's section */
+div#scheduleContainer{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+p.eventField{
+    margin: auto;
+}
+
+
+hr.scheduleHr{
+    width:100% ;
+}
+
+.btn-lg {
+    background-color: #013369;
+    border-color: #013369;
+    color:white;
+    width:50%;
+    margin:0.5em;
+}
+
+h3.edit-match-title{
+    width: 100%;
+    text-align: center;
+}
+/* End Bryle's section */
+
+/* Start Han's section */
+.player-padding{
+  margin: 0rem 1rem 1rem 1rem;
+}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+
+
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    filter: alpha(opacity=0);
+    outline: none;
+    background-color: #013369;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+}
+
+.profile-img{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  content: url("../images/d-profile.png");
+  display: block;
+}
+ 
+ .add-player-btn-delete{
+  background-color: #d70101; 
+ }
+
+/* End Han's section */
+
+/* Start Harrison's section */
+.mobile-hidden {
+    display: none;
+}
+
+.desktop-hidden {
+    display: inline-block;
+}
+
+span.light {
+    color: #ffffff;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.btn:hover {
+    background-color: #054d9d;
+    border-color: #023f82;
+}
+
+.navbar-brand > img {
+    height: 2rem;
+    padding: 0rem;
+    width: auto;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+    background-color: #1d2227;
+    border-color: #323a43;
+}
+
+.jumbotron.bg-gray {
+  background-color: #eeeeee;
+}
+/* End Harrison's section */
+
+/* For width 768px and larger: */
+@media only screen and (min-width: 768px) {
+    img.logo { 
+        width: 65%;
+    }
+    
+    /* Start Bryle's section for Large Screens */
+    hr.scheduleHr { 
+        width: 30% !important;
+    }
+    /* End Bryle's section for Large Screens */
+
+    /* Start Han's section for Large Screens */
+
+    /* End Han's section for Large Screens */
+
+    /* Start Harrison's section for Large Screens */
+    .mobile-hidden {
+        display: inline-block;
+    }
+  
+    .desktop-hidden {
+        display: none;
+    }
+    /* End Harrison's section for Large Screens */
+}
+
