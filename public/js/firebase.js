@@ -1,10 +1,10 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyCyKaPWPe41DRh365sypkguXwR5Nk-X3fc",
-  authDomain: "cse134b-castro-lin-you-hw2.firebaseapp.com",
-  databaseURL: "https://cse134b-castro-lin-you-hw2.firebaseio.com",
-  projectId: "cse134b-castro-lin-you-hw2",
-  storageBucket: "cse134b-castro-lin-you-hw2.appspot.com",
-  messagingSenderId: "279293280"
+  apiKey: "AIzaSyBSFe2_t3RDm3-es6-DtnlrE43z72v4Woc",
+  authDomain: "teamwatch-4f856.firebaseapp.com",
+  databaseURL: "https://teamwatch-4f856.firebaseio.com",
+  projectId: "teamwatch-4f856",
+  storageBucket: "teamwatch-4f856.appspot.com",
+  messagingSenderId: "912182851530"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(config); 
