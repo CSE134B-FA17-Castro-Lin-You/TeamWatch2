@@ -11,9 +11,16 @@ function handleLogin(){
   });
 }
 
+firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+}, function(error) {
+  // An error happened.
+});
+
 firebase.auth().onAuthStateChanged(function(user) {
   if(user){
     console.log("Welcome " + user.displayName + ": email = " + user.email);
+    window.location = "/view-game-schedule.html";
   } else {
     console.log("Goodbye");
   }
