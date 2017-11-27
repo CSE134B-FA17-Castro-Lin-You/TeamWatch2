@@ -21,7 +21,7 @@
 
 
     <script>
- $(function () {
+ /*$(function () {
    var bindDatePicker = function() {
 		$(".date").datetimepicker({
         format:'DD-MM-YYYY HH-mm',
@@ -71,7 +71,7 @@
    }
  
    bindDatePicker();
- });
+ });*/
  </script>     
 </head>
 
@@ -111,7 +111,7 @@
     <main role="main" class="container mt-3 mt-md-1">
       <div class="row justify-content-center">
         <form class="jumbotron col-md-6 col-sm-12 mt-3 mt-md-5 bg-gray" action="view-game-schedule.html">
-          <h2 class="edit-match-title">Add A New Game</h2>
+          <h2 class="edit-match-title">Edit Game</h2>
           
           <!-- practice or match -->
           <div class="form-group">
@@ -152,6 +152,7 @@
               </div>
             </div>   
 
+            
             <div class="form-group">
               <label>Status</label>
               <div class="radio">
@@ -170,7 +171,9 @@
           <!--<button type="button" onclick="handleSaveGame()" class="btn btn-lg center-block">Save</button>
           
           <button type="button" onclick="handleDeleteGame()" class="btn btn-lg center-block">Delete</button> -->
-          <button type="submit" class="btn btn-lg center-block">Save</button>
+          <button type="submit" onclick=handleEditGame class="btn btn-lg center-block">Save</button>
+          
+          <button type="submit" onclick=handleDeleteGame class="btn btn-lg center-block">Delete</button>
         </form>
       </div>
     </main>
