@@ -85,148 +85,47 @@
       <!-- mobile-hidden add/edit button -->
       <p class="mobile-hidden light"><a href="add-player.html" class="btn btn-primary" role="button">Add a New Player</a></p>
 
-      <!-- Player One -->
-      <div class="row">
-        <div class="col-md-4">
-          <a href="view-player.html">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Person McPerson">
-          </a>
-        </div>
-        <div class="col-md-3">
-          <h3>Person McPerson</h3>
-          <h4>Forward</h4>
-          <h5>Jersey #11</h5>
-        </div>
-        <div class="col-md-5">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <th scope="row">Date of Birth</th>
-                <td>January 1, 1991</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Goals</th>
-                <td>111</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Appearances</th>
-                <td>11</td>
-              </tr>
-            </tbody>
-          </table>
-          <a class="btn btn-primary" href="view-player.html">View Player Profile</a>
-        </div>
-      </div>
-      <!-- /.row -->
+       <div id="view">
+    
+   
+       </div>    
+      <template id=rosterTemplate>    
+          <!-- Player One -->
+          <div class="row">
+            <div class="col-md-4">
+              <a href="view-player.html">
+                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Person McPerson">
+              </a>
+            </div>
+            <div class="col-md-3">
+              <h3 class="playerName">Person McPerson</h3>
+              <h4 class="playerPosition">Forward</h4>
+              <h5 class="playerJersey">Jersey #11</h5>
+            </div>
+            <div class="col-md-5">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th scope="row">Date of Birth</th>
+                    <td class="playerDOB">January 1, 1991</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Career Goals</th>
+                    <td>111</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Career Appearances</th>
+                    <td>11</td>
+                  </tr>
+                </tbody>
+              </table>
+              <a class="btn btn-primary" href="view-player.html">View Player Profile</a>
+            </div>
+          </div>
+          <!-- /.row -->
 
-      <hr>
-
-      <!-- Player Two -->
-      <div class="row">
-        <div class="col-md-4">
-          <a href="view-player.html">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Dude Guy">
-          </a>
-        </div>
-        <div class="col-md-3">
-          <h3>Dude Guy</h3>
-          <h4>Striker</h4>
-          <h5>Jersey #22</h5>
-        </div>
-        <div class="col-md-5">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <th scope="row">Date of Birth</th>
-                <td>February 2, 1992</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Goals</th>
-                <td>222</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Appearances</th>
-                <td>22</td>
-              </tr>
-            </tbody>
-          </table>
-          <a class="btn btn-primary" href="view-player.html">View Player Profile</a>
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Player Three -->
-      <div class="row">
-        <div class="col-md-4">
-          <a href="view-player.html">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Indy Vidual">
-          </a>
-        </div>
-        <div class="col-md-3">
-          <h3>Indy Vidual</h3>
-          <h4>Defensive Midfielder</h4>
-          <h5>Jersey #33</h5>
-        </div>
-        <div class="col-md-5">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <th scope="row">Date of Birth</th>
-                <td>March 3, 1993</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Goals</th>
-                <td>33</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Appearances</th>
-                <td>33</td>
-              </tr>
-            </tbody>
-          </table>
-          <a class="btn btn-primary" href="view-player.html">View Player Profile</a>
-        </div>
-      </div>
-      <!-- /.row -->
-
-      <hr>
-
-      <!-- Player Four -->
-      <div class="row">
-        <div class="col-md-4">
-          <a href="view-player.html">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Hito Kata">
-          </a>
-        </div>
-        <div class="col-md-3">
-          <h3>Hito Kata</h3>
-          <h4>Goalkeeper</h4>
-          <h5>Jersey #44</h5>
-        </div>
-        <div class="col-md-5">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <th scope="row">Date of Birth</th>
-                <td>April 4, 1994</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Goals</th>
-                <td>4</td>
-              </tr>
-              <tr>
-                <th scope="row">Career Appearances</th>
-                <td>44</td>
-              </tr>
-            </tbody>
-          </table>
-          <a class="btn btn-primary" href="view-player.html">View Player Profile</a>
-        </div>
-      </div>
-      <!-- /.row -->
-
+          <hr>
+      </template>     
       <hr>
 
       <!-- Pagination -->
@@ -254,14 +153,10 @@
         </li>
       </ul>
     </main>
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+      
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+      <script src="js/firebase.js"></script>
+      <script src="js/playersCrud.js"></script>
+      <script>handleCreate()</script>
   </body>
 </html>
