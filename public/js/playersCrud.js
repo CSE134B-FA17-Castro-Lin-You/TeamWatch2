@@ -49,8 +49,9 @@ function handleRead(){
             var dob = childSnapshot.child("dob").val();
             var fName = childSnapshot.child("fName").val();  
             var jersey = "Jersey #" + childSnapshot.child("jersey").val();
-            var lName = childSnapshot.child("lName").val();
-            var position = childSnapshot.child("position").val();
+            var lName = childSnapshot.child("lName").val();    
+            var position = childSnapshot.child("position").checked;
+                
 
             fName = capitalizeFirstLetter(fName);
             lName = capitalizeFirstLetter(lName);
@@ -71,6 +72,13 @@ function saveJerseyNum(objButton){
     var fired_button = objButton.value;
     fired_button = fired_button.split('#').pop();        
     localStorage.setItem("jerseyNumber", fired_button);
+}
+
+function getJerseyNum(){
+    var num = document.querySelector('.viewplayerJersey').innerHTML;
+    num = num.split('#').pop();
+    localStorage.setItem("jerseyNumber",num);
+    
 }
 
 function handleReadForViewPlayer(){
@@ -96,3 +104,71 @@ function handleReadForViewPlayer(){
         });
       });
 }
+
+function handleEditPlayer(){
+    var jNum = localStorage.getItem("jerseyNumber");
+    var query = firebase.database().ref('Players/JerseyNumber' +jNum);
+    query.once("value").then(function(snapshot) {
+            var dob = snapshot.child("dob").val();
+            var fName = snapshot.child("fName").val();  
+            var jersey = snapshot.child("jersey").val();
+            var lName = snapshot.child("lName").val();
+            var position = snapshot.child("position").val();
+            var email = snapshot.child("email").val();
+            var checkBox = snapshot.child("captainCheck").val();
+            document.getElementById("editPlayerFName").value = fName;
+            document.getElementById("editPlayerLName").value = lName;
+            document.getElementById("editPlayerPosition").value = position;
+            document.getElementById("editPlayerJersey").value = jersey;
+            document.getElementById("editPlayerDOB").value = dob;
+            document.getElementById("editPlayerEmail").value = email;
+            if(checkBox == true){
+                document.getElementById("editCaptainCheck").checked = true;
+            }
+            else{
+                document.getElementById("editCaptainCheck").checked = false;
+            }
+        });
+    
+}
+
+function handleSaveEdit() {
+  var fName = document.getElementById("editPlayerFName").value.trim();
+  var lName = document.getElementById("editPlayerLName").value.trim();
+  var email = document.getElementById("editPlayerEmail").value.trim();
+  var dob = document.getElementById("editPlayerDOB").value;
+  var jersey = document.getElementById("editPlayerJersey").value.trim();  
+  var e = document.getElementById("editPlayerPosition");
+  var position = e.options[e.selectedIndex].text;
+  var captainCheck = document.getElementById("editCaptainCheck").checked;
+
+  if (captainCheck != "on") {
+    // toggle some attribute in html
+    // TODO form validation & noty user by modifying hidden HTML elements
+  }
+
+  firebase.database().ref('/Players/' + "JerseyNumber" + jersey).set({
+      fName: fName,
+      lName: lName,
+      email: email,
+      dob: dob,
+      jersey:jersey,
+      position:position,
+      captainCheck: captainCheck
+      
+  }).then(function onSuccess(res) {
+      window.location = "/teamstats.html";
+  }).catch(function onError(err) {  
+  });
+  window.location = "/teamstats.html";    
+}
+
+function handleDeletePlayer(){
+    var jNum = localStorage.getItem("jerseyNumber");
+    firebase.database().ref('Players/JerseyNumber' +jNum).remove();
+    window.location = "/teamstats.html";
+}
+
+/*ESLint Problems: None */
+
+

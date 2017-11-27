@@ -6,31 +6,22 @@
     <meta name="description" content="A roster and statistics management tool for soccer organizations.">
     <meta name="author" content="Castro-Lin-You">
     <link rel="icon" href="favicon.ico">
-
     <title>TeamWatch</title>
-
     <!-- Bootstrap core CSS -->
     <link href="css/game-schedule-module.css" rel="stylesheet">
-    
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    
     <!-- Custom styles for this template -->
     <link href="css/main.css" rel="stylesheet">
   </head>
-
   <body class="with-nav">
-
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="fa fa-bars fa-lg light"></span>
+      <span class="fa fa-bars fa-lg light"></span>
       </button>
-
       <a class="navbar-brand" href="view-game-schedule.html"><img class="mobile-hidden" src="images/logo.png" alt="teamwatch logo"><img class="desktop-hidden" src="images/logo-small.png" alt="teamwatch logo"></a>
-
       <!-- desktop-hidden navbar button -->
       <a href="edit-player.html" class="btn btn-primary desktop-hidden" role="button"><span class="fa fa-pencil fa-lg light"></span></a>
-
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -53,62 +44,53 @@
         <span class="mobile-hidden light"><a href="login.html" class="btn btn-primary" role="button">Log Out</a></span>
       </div>
     </nav>
-
-
-
     <main role="main" class="container">
-      
       <!-- mobile-hidden add/edit button -->
-      <p class="mobile-hidden light"><a href="edit-player.html" class="btn btn-primary" role="button" type="button" onclick="getJerseyToDelete()">Edit Player</a></p>
-     <div id="viewPlayerView"></div>    
-      <template id=viewPlayerTemplate>    
-          <!-- Player One -->
-          <div class="row">
-            <div class="col-md-4">
-              <a href="view-player.html">
-                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Person McPerson">
-              </a>
-            </div>
-            <div class="col-md-3">
-              <h3 class="viewplayerName">Person McPerson</h3>
-              <h4 class="viewplayerPosition">Forward</h4>
-              <h5 class="viewplayerJersey">Jersey #11</h5>
-            </div>
-            <div class="col-md-5">
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th scope="row">Date of Birth</th>
-                    <td class="viewplayerDOB">January 1, 1991</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Career Goals</th>
-                    <td>111</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Career Appearances</th>
-                    <td>11</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <p class="mobile-hidden light"><a href="edit-player.html" onclick="getJerseyNum()" class="btn btn-primary" role="button" type="button">Edit Player</a></p>
+      <div id="viewPlayerView"></div>
+      <template id=viewPlayerTemplate>
+        <!-- Player One -->
+        <div class="row">
+          <div class="col-md-4">
+            <a href="view-player.html">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Person McPerson">
+            </a>
           </div>
-      </template>     
-          <!-- /.row -->
-
-          <hr>     
-
-
+          <div class="col-md-3">
+            <h3 class="viewplayerName">Person McPerson</h3>
+            <h4 class="viewplayerPosition">Forward</h4>
+            <h5 class="viewplayerJersey">Jersey #11</h5>
+          </div>
+          <div class="col-md-5">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <th scope="row">Date of Birth</th>
+                  <td class="viewplayerDOB">January 1, 1991</td>
+                </tr>
+                <tr>
+                  <th scope="row">Career Goals</th>
+                  <td>111</td>
+                </tr>
+                <tr>
+                  <th scope="row">Career Appearances</th>
+                  <td>11</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </template>
+      <!-- /.row -->
+      <hr>
       <!-- drop dowm -->
       <select class="form-control" id="addPlayerPosition">
-          <option value="totalstats">Total stats</option>
-          <option value="game1">Game 1</option>
-          <option value="game2">Game 2</option>
-          <option value="game3">Game 3</option>
-       </select>
-
-
-       <!-- display stats -->
+        <option value="totalstats">Total stats</option>
+        <option value="game1">Game 1</option>
+        <option value="game2">Game 2</option>
+        <option value="game3">Game 3</option>
+      </select>
+      <!-- display stats -->
       <div id="totalstats" class="hidden">
         <table class="table table-striped">
           <tbody>
@@ -151,13 +133,16 @@
           </tbody>
         </table>
       </div>
-
-
     </main>
-
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="js/firebase.js"></script>
     <script src="js/playersCrud.js"></script>
     <script>handleReadForViewPlayer()</script>  
   </body>
+    
+    <!-- Evaluations: 3G Connection with disabled caching 
+    233KB Transffered
+    DOMContentLoaded: 2.59s
+    Load: 2.72s
+    -->
 </html>
