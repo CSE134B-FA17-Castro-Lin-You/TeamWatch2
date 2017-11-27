@@ -21,7 +21,7 @@ function handleAddPlayer() {
     // TODO form validation & noty user by modifying hidden HTML elements
   }
 
-  firebase.database().ref('/Players/' + "JerseyNumber:" + jersey).set({
+  firebase.database().ref('/Players/' + "JerseyNumber" + jersey).set({
       fName: fName,
       lName: lName,
       email: email,
@@ -75,14 +75,11 @@ function saveJerseyNum(objButton){
 
 function handleReadForViewPlayer(){
     var jNum = localStorage.getItem("jerseyNumber");
-    alert(jNum);
     window.addEventListener('DOMContentLoaded', function () {
-        var query = firebase.database().ref("Players/JerseyNumber:"+jNum);
+        var query = firebase.database().ref('Players/JerseyNumber' +jNum);
         query.once("value").then(function(snapshot) {
             var dob = snapshot.child("dob").val();
-            alert(dob);
             var fName = snapshot.child("fName").val();  
-            alert(fName);
             var jersey = "Jersey #" + snapshot.child("jersey").val();
             var lName = snapshot.child("lName").val();
             var position = snapshot.child("position").val();
@@ -90,12 +87,12 @@ function handleReadForViewPlayer(){
             fName = capitalizeFirstLetter(fName);
             lName = capitalizeFirstLetter(lName);
             var tmpl = document.getElementById('viewPlayerTemplate').content.cloneNode(true);
-            tmpl.querySelector('.playerName').innerText = fName + " " + lName ;
-            tmpl.querySelector('.playerPosition').innerText = position;
-            tmpl.querySelector('.playerJersey').innerText = jersey;
-            tmpl.querySelector('.playerDOB').innerHTML = dob;
+            tmpl.querySelector('.viewplayerName').innerText = fName + " " + lName ;
+            tmpl.querySelector('.viewplayerPosition').innerText = position;
+            tmpl.querySelector('.viewplayerJersey').innerText = jersey;
+            tmpl.querySelector('.viewplayerDOB').innerHTML = dob;
             // add it to the view
-            document.querySelector('#view').appendChild(tmpl);        
+            document.querySelector('#viewPlayerView').appendChild(tmpl);          
         });
       });
 }
