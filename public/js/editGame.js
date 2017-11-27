@@ -36,13 +36,15 @@
       window.location = "/view-game-schedule.html"
     }
   });
+
+
 function handleDeleteGame(){
-  document.addEventListener("DOMContentLoaded", function (event){
-    "use strict";
+    //"use strict";
     var url = new URL(window.location.href),
     id = url.searchParams.get("id");
-    console.log("id = " + id);
-    firebase.database().ref('/Games/GameId:' + id).remove();
-    window.location = "/view-game-schedule.html"
-  });
-}
+    //console.log("id = " + id);
+    alert("id = " + id);
+    firebase.database().ref('/Games/GameId:' + id).remove().then(){
+      window.location = "/view-game-schedule.html"
+    };
+  }
