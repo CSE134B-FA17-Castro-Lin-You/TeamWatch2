@@ -1,4 +1,4 @@
-function handleAddPlayer(){
+function handleAddPlayer() {
   var fName = document.getElementById("addPlayerFName").value.trim();
   var lName = document.getElementById("addPlayerLName").value.trim();
   var email = document.getElementById("addPlayerEmail").value.trim();
@@ -36,11 +36,44 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function handleCreate(){
+function handleRead(){
     window.addEventListener('DOMContentLoaded', function () {
         var query = firebase.database().ref("Players").orderByKey();
         query.once("value")
         .then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+            // childData will be the actual contents of the child   
+            let dob = childSnapshot.child("dob").val();
+            let email = childSnapshot.child("email").val();
+            let fName = childSnapshot.child("fName").val();  
+            let jersey = "Jersey #" + childSnapshot.child("jersey").val();
+            let lName = childSnapshot.child("lName").val();
+            let position = childSnapshot.child("position").val();
+
+            fName = capitalizeFirstLetter(fName);
+            lName = capitalizeFirstLetter(lName);
+            var tmpl = document.getElementById('rosterTemplate').content.cloneNode(true);
+            tmpl.querySelector('.playerName').innerText = fName + " " + lName ;
+            tmpl.querySelector('.playerPosition').innerText = position;
+            tmpl.querySelector('.playerJersey').innerText = jersey;
+            tmpl.querySelector('.playerDOB').innerHTML = dob;
+            // add it to the view
+            document.querySelector('#view').appendChild(tmpl);    
+            });      
+        });
+
+      });
+}
+
+
+
+function handleReadForViewPlayer(){
+   alert(document.querySelector('.playerJersey'));
+    
+     /* window.addEventListener('DOMContentLoaded', function () {
+        var query = firebase.database().ref("Players").orderByKey();
+        query.once("value")
+        .then(function(snapshot) 
             snapshot.forEach(function(childSnapshot) {
             // childData will be the actual contents of the child
             console.log(childSnapshot.val());    
@@ -62,9 +95,8 @@ function handleCreate(){
             // add it to the view
             document.querySelector('#view').appendChild(tmpl);    
             });      
-    });
+        });
 
-      });
-   
+      });*/
     
 }

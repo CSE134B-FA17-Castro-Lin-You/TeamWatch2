@@ -61,37 +61,45 @@
       <!-- mobile-hidden add/edit button -->
       <p class="mobile-hidden light"><a href="edit-player.html" class="btn btn-primary" role="button">Edit Player</a></p>
 
-      <!-- Player -->
-      <div class="row">
-        <div class="col-md-4">
-          <a href="temp.html">
-            <img class="img-fluid round-pic mb-3 mb-md-0" src="http://placehold.it/250x250" alt="Photo of Person McPerson">
-          </a>
-        </div>
-        <div class="col-md-3">
-          <h3>Person McPerson</h3>
-          <h4>Forward</h4>
-          <h5>000010</h5>
-        </div>
-        <div class="col-md-5">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <th scope="row">Date of Birth</th>
-                <td>January 1, 1991</td>
-              </tr>
-              <tr>
-                <th scope="row">Jersey #</th>
-                <td>11</td>
-              </tr>
-              <tr>
-                <th scope="row">Position</th>
-                <td>Forward</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>     
-      </div>
+        
+      <div id="viewPlayer"></div>    
+      <template id=rosterTemplate>    
+          <!-- Player One -->
+          <div class="row">
+            <div class="col-md-4">
+              <a href="view-player.html">
+                <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/400x300" alt="Photo of Person McPerson">
+              </a>
+            </div>
+            <div class="col-md-3">
+              <h3 class="playerName">Person McPerson</h3>
+              <h4 class="playerPosition">Forward</h4>
+              <h5 class="playerJersey">Jersey #11</h5>
+            </div>
+            <div class="col-md-5">
+              <table class="table table-striped">
+                <tbody>
+                  <tr>
+                    <th scope="row">Date of Birth</th>
+                    <td class="playerDOB">January 1, 1991</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Career Goals</th>
+                    <td>111</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Career Appearances</th>
+                    <td>11</td>
+                  </tr>
+                </tbody>
+              </table>
+              <a class="btn btn-primary" href="view-player.html">View Player Profile</a>
+            </div>
+          </div>
+          <!-- /.row -->
+
+          <hr>
+      </template>     
 
 
       <!-- drop dowm -->

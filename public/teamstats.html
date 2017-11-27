@@ -85,10 +85,7 @@
       <!-- mobile-hidden add/edit button -->
       <p class="mobile-hidden light"><a href="add-player.html" class="btn btn-primary" role="button">Add a New Player</a></p>
 
-       <div id="view">
-    
-   
-       </div>    
+       <div id="view"></div>    
       <template id=rosterTemplate>    
           <!-- Player One -->
           <div class="row">
@@ -119,7 +116,7 @@
                   </tr>
                 </tbody>
               </table>
-              <a class="btn btn-primary" href="view-player.html">View Player Profile</a>
+              <a onclick="handleReadForViewPlayer()" class="btn btn-primary" href="view-player.html">View Player Profile</a>
             </div>
           </div>
           <!-- /.row -->
@@ -157,6 +154,6 @@
       <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
       <script src="js/firebase.js"></script>
       <script src="js/playersCrud.js"></script>
-      <script>handleCreate()</script>
+      <script>handleRead()</script>
   </body>
 </html>
