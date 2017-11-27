@@ -1,23 +1,33 @@
-function handleSignUp(){
-  var fName = document.getElementById("inputFName").value.trim();
-  var lName = document.getElementById("inputLName").value.trim();
-  var email = document.getElementById("inputEmail").value.trim();
-  var password = document.getElementById("inputPassword").value; 
-  var tos = document.getElementById("tosAgree").value;
+/*jslint devel: true*/
+/*eslint-env browser*/
 
-  if (tos != "on") {
+/*global firebase:true*/
+/*eslint no-undef: "error"*/
+/*eslint no-unused-vars: ["error", { "vars": "local", "args": "none" }]*/
+
+function handleSignUp() {
+  "use strict";
+  var fName = document.getElementById("inputFName").value.trim(),
+    lName = document.getElementById("inputLName").value.trim(),
+    email = document.getElementById("inputEmail").value.trim(),
+    password = document.getElementById("inputPassword").value,
+    tos = document.getElementById("tosAgree").checked;
+
+  if (!tos) {
     // toggle some attribute in html
     // TODO form validation & notify user by modifying hidden HTML elements
+    alert("Please accept the tos");
+    return;
   }
 
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+  firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
     // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
+    //var errorCode = error.code;
+    //var errorMessage = error.message;
   });
 
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user){
+  firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
       console.log("Welcome " + user.displayName + ": email = " + user.email);
       
       // fetch userID
@@ -38,8 +48,10 @@ function handleSignUp(){
   });
 }
 
-firebase.auth().signOut().then(function() {
+firebase.auth().signOut().then(function () {
   // Sign-out successful.
-}, function(error) {
+  "use strict";
+}, function (error) {
   // An error happened.
+  "use strict";
 });

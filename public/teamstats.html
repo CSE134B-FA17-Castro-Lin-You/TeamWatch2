@@ -22,7 +22,7 @@
   <body class="with-nav">
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleNav()">
         <span class="fa fa-bars fa-lg light"></span>
       </button>
       <a class="navbar-brand" href="view-game-schedule.html"><img class="mobile-hidden" src="images/logo.png" alt="teamwatch logo"><img class="desktop-hidden" src="images/logo-small.png" alt="teamwatch logo"></a>
@@ -34,8 +34,8 @@
             <a class="nav-link" href="teamstats.html">Team Stats <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Upcoming Matches</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">Upcoming Matches</a>
+            <div id="navbarDropdownMenu" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="matchstats.html">Today's Match</a>
               <a class="dropdown-item" href="view-game-schedule.html">All Matches</a>
             </div>
@@ -150,10 +150,19 @@
         </li>
       </ul>
     </main>
+<<<<<<< HEAD
       
       <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
       <script src="js/firebase.js"></script>
       <script src="js/playersCrud.js"></script>
       <script>handleRead()</script>
+=======
+
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/teamstats.js"></script>
+    <script src="js/playersCrud.js"></script>
+    <script>handleCreate()</script>
+>>>>>>> 9bbdbd54021b5eca00ec22dadfc1e10e14c8af56
   </body>
 </html>
