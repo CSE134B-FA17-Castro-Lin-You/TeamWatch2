@@ -83,8 +83,8 @@
           <thead>
             <tr>
               <th>Property</th>
-              <th>My Team</th>
-              <th>Opponent</th>
+              <th id="us">My Team</th>
+              <th id="them">Opponent</th>
             </tr>
           </thead>
           <tbody>
@@ -130,17 +130,13 @@
             </tr>
           </tbody>
         </table>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="handleUpdate()">Save</button>
       </form>
     </main>
       
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/recordMatchCrud.js"></script>
   </body>
 </html>

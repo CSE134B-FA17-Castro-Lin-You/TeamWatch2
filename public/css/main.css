@@ -19,7 +19,6 @@ form.jumbotron {
     border-color: #013369;
 }
 
-
 /* Show it is fixed to the top */
 body.with-nav {
   padding-top: 4.5rem;
@@ -115,6 +114,12 @@ h3.edit-match-title{
     display: inline-block;
 }
 
+.btn-danger {
+    color: #ffffff;
+    background-color: #8E001C;
+    border-color: #8E001C;
+}
+
 span.light {
     color: #ffffff;
 }
@@ -128,13 +133,18 @@ span.light {
     border-color: #023f82;
 }
 
+.btn-danger:hover {
+  background-color: #B90D2F;
+  border-color: #A20726;
+}
+
 .navbar-brand > img {
     height: 2rem;
     padding: 0rem;
     width: auto;
 }
 
-.btn-primary.disabled, .btn-primary:disabled {
+.btn.disabled, .btn:disabled {
     background-color: #1d2227;
     border-color: #323a43;
 }
