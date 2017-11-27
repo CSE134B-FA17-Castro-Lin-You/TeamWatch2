@@ -51,3 +51,5 @@ firebase.auth().signOut().then(function () {
   // An error happened.
   "use strict";
 });
+
+/*ESLint Problems: None */

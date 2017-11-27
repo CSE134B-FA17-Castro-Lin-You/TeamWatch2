@@ -169,6 +169,6 @@ function handleDeletePlayer(){
     window.location = "/teamstats.html";
 }
 
-
+/*ESLint Problems: None */
 
 

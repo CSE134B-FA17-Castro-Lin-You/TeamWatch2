@@ -24,7 +24,7 @@ function handleAddGame(){
       window.location = "/view-game-schedule.html";
   }).catch(function onError(err) {
         // Handle Error 
-      console.log(err);
+      //console.log(err);
   });
     
 }
@@ -57,3 +57,5 @@ function handleCreateGame(){
     });
   });     
 }
+
+/*ESLint Problems: None */

@@ -8,3 +8,8 @@ var config = {
   messagingSenderId: "912182851530"
 };
 firebase.initializeApp(config); 
+
+/* ESLint Problems: 1 Error
+ *  
+ * ERROR: firebase.initializeApp(config); 
+ */

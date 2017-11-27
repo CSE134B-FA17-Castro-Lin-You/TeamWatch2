@@ -31,3 +31,5 @@ firebase.auth().onAuthStateChanged(function (user) {
    // console.log("Goodbye");
   }
 });
+
+/*ESLint Problems: None */
