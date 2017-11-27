@@ -28,7 +28,6 @@ function handleSignUp() {
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-      console.log("Welcome " + user.displayName + ": email = " + user.email);
       
       // fetch userID
       firebase.database().ref('/Users/' + user.uid).set({
@@ -40,11 +39,8 @@ function handleSignUp() {
         window.location = "/view-game-schedule.html";
       }).catch(function onError(err) {
         // Handle Error
-        console.error(err);
       });
-    } else {
-      console.log("Goodbye");
-    }
+    } 
   });
 }
 

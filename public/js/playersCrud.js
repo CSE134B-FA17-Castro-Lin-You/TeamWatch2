@@ -1,9 +1,16 @@
+/*jslint devel: true*/
+/*eslint-env browser*/
+
+/*global firebase:true*/
+/*global jerseyToDelete*/
+/*eslint no-undef: "error"*/
+/*eslint no-unused-vars: ["error", { "vars": "local", "args": "none" }]*/
+
 function handleAddPlayer() {
   var fName = document.getElementById("addPlayerFName").value.trim();
   var lName = document.getElementById("addPlayerLName").value.trim();
   var email = document.getElementById("addPlayerEmail").value.trim();
   var dob = document.getElementById("addPlayerDOB").value;
-  console.log(dob);
   var jersey = document.getElementById("addPlayerJersey").value.trim();  
   var e = document.getElementById("addPlayerPosition");
   var position = e.options[e.selectedIndex].text;
@@ -25,9 +32,7 @@ function handleAddPlayer() {
       
   }).then(function onSuccess(res) {
       window.location = "/teamstats.html";
-  }).catch(function onError(err) {
-        // Handle Error 
-      console.error(err);
+  }).catch(function onError(err) {  
   });
     
 }
@@ -39,16 +44,13 @@ function capitalizeFirstLetter(string) {
 function handleRead(){
     window.addEventListener('DOMContentLoaded', function () {
         var query = firebase.database().ref("Players").orderByKey();
-        query.once("value")
-        .then(function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-            // childData will be the actual contents of the child   
-            let dob = childSnapshot.child("dob").val();
-            let email = childSnapshot.child("email").val();
-            let fName = childSnapshot.child("fName").val();  
-            let jersey = "Jersey #" + childSnapshot.child("jersey").val();
-            let lName = childSnapshot.child("lName").val();
-            let position = childSnapshot.child("position").val();
+        query.once("value").then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot){
+            var dob = childSnapshot.child("dob").val();
+            var fName = childSnapshot.child("fName").val();  
+            var jersey = "Jersey #" + childSnapshot.child("jersey").val();
+            var lName = childSnapshot.child("lName").val();
+            var position = childSnapshot.child("position").val();
 
             fName = capitalizeFirstLetter(fName);
             lName = capitalizeFirstLetter(lName);
@@ -57,46 +59,43 @@ function handleRead(){
             tmpl.querySelector('.playerPosition').innerText = position;
             tmpl.querySelector('.playerJersey').innerText = jersey;
             tmpl.querySelector('.playerDOB').innerHTML = dob;
+            tmpl.querySelector('#viewPlayerButton').value = jersey;
             // add it to the view
             document.querySelector('#view').appendChild(tmpl);    
             });      
         });
-
       });
 }
 
-
+function saveJerseyNum(objButton){
+    var fired_button = objButton.value;
+    fired_button = fired_button.split('#').pop();        
+    localStorage.setItem("jerseyNumber", fired_button);
+}
 
 function handleReadForViewPlayer(){
-   alert(document.querySelector('.playerJersey'));
-    
-     /* window.addEventListener('DOMContentLoaded', function () {
-        var query = firebase.database().ref("Players").orderByKey();
-        query.once("value")
-        .then(function(snapshot) 
-            snapshot.forEach(function(childSnapshot) {
-            // childData will be the actual contents of the child
-            console.log(childSnapshot.val());    
-            let captainCheck = childSnapshot.child("captain").val();
-            let dob = childSnapshot.child("dob").val();
-            let email = childSnapshot.child("email").val();
-            let fName = childSnapshot.child("fName").val();  
-            let jersey = "Jersey #" + childSnapshot.child("jersey").val();
-            let lName = childSnapshot.child("lName").val();
-            let position = childSnapshot.child("position").val();
+    var jNum = localStorage.getItem("jerseyNumber");
+    alert(jNum);
+    window.addEventListener('DOMContentLoaded', function () {
+        var query = firebase.database().ref("Players/JerseyNumber:"+jNum);
+        query.once("value").then(function(snapshot) {
+            var dob = snapshot.child("dob").val();
+            alert(dob);
+            var fName = snapshot.child("fName").val();  
+            alert(fName);
+            var jersey = "Jersey #" + snapshot.child("jersey").val();
+            var lName = snapshot.child("lName").val();
+            var position = snapshot.child("position").val();
 
             fName = capitalizeFirstLetter(fName);
             lName = capitalizeFirstLetter(lName);
-            var tmpl = document.getElementById('rosterTemplate').content.cloneNode(true);
+            var tmpl = document.getElementById('viewPlayerTemplate').content.cloneNode(true);
             tmpl.querySelector('.playerName').innerText = fName + " " + lName ;
             tmpl.querySelector('.playerPosition').innerText = position;
             tmpl.querySelector('.playerJersey').innerText = jersey;
             tmpl.querySelector('.playerDOB').innerHTML = dob;
             // add it to the view
-            document.querySelector('#view').appendChild(tmpl);    
-            });      
+            document.querySelector('#view').appendChild(tmpl);        
         });
-
-      });*/
-    
+      });
 }
