@@ -50,7 +50,7 @@ function handleRead(){
             var fName = childSnapshot.child("fName").val();  
             var jersey = "Jersey #" + childSnapshot.child("jersey").val();
             var lName = childSnapshot.child("lName").val();    
-            var position = childSnapshot.child("position").checked;
+            var position = childSnapshot.child("position").val();
                 
 
             fName = capitalizeFirstLetter(fName);
