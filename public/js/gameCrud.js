@@ -4,85 +4,59 @@
 /*global firebase:true*/
 /*eslint no-undef: "error"*/
 /*eslint no-unused-vars: ["error", { "vars": "local", "args": "none" }]*/
-function handleAddPlayer(){
-  var gameType;
-  var oTeam = document.getElementById("addOpponentTeam").value.trim();
-  var gLoc = document.getElementById("addLocation").value.trim();
+function handleAddGame(){
+  var gameType = document.getElementById("gameType").value.trim();
+  var them = document.getElementById("addOpponentTeam").value.trim();
+  var location = document.getElementById("addLocation").value.trim();
   var gDate = document.getElementById("addDate").value.trim();
   var gTime = document.getElementById("addTime").value;
-  var status;
-  
-  if(document.getElementById("practice") == "on"){
-    gameType = "Practice";
-  }
-  else{
-    gameType = "Match"
-  }
-  
-  if(document.getElementById("home").value.trim() == "on"){
-    status = "Home";
-  }
-  else{
-    status = "Away";
-  }
-  
+  var status = document.getElementById("status").value.trim();
   
 
-  console.log("gameType is = " + gameType);
-  
-  if (gameType == "on") {
-    // toggle to hide "opponent team" field in html
-    // TODO form validation & noty user by modifying hidden HTML elements
-  }
-
-  firebase.database().ref('/Games/' + 0).set({
+  firebase.database().ref('/Games/' + gDate + location).set({
       gameType: gameType,
-      oTeam: oTeam,
-      gLoc: gLoc,
+      them: them,
+      location: location,
       gDate: gDate,
       gTime: gTime,
       status: status,      
   }).then(function onSuccess(res) {
-      window.location = "/record-match-stats.html";
+      window.location = "/view-game-schedule.html";
   }).catch(function onError(err) {
         // Handle Error 
-      Console.log(err);
+      //console.log(err);
   });
     
 }
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function handleCreate(){
+function handleReadGame(){
   window.addEventListener('DOMContentLoaded', function () {
-    var query = firebase.database().ref("Players").orderByKey();
+    var query = firebase.database().ref("Games").orderByKey();
     query.once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) { // for loop here
       // childData will be the actual contents of the child
         //console.log(childSnapshot.val());    
         
-        /*
-        let captainCheck = childSnapshot.child("captain").val();
-        let dob = childSnapshot.child("dob").val();
-        let email = childSnapshot.child("email").val();
-        let fName = childSnapshot.child("fName").val();  
-        let jersey = "Jersey #" + childSnapshot.child("jersey").val();
-        let lName = childSnapshot.child("lName").val();
-        let position = childSnapshot.child("position").val();
-*/
-        oTeam = capitalizeFirstLetter(oTeam);
-        var tmpl = document.getElementById('upcomingGame').content.cloneNode(true);
-        tmpl.querySelector('.upcomingTime').innerText = gDate + " at " + gTime;
-        tmpl.querySelector('.gLocation').innerText = gLocation;
-        tmpl.querySelector('.matchUp').innerText = "My Team vs " + oTeam;
-        if(gameType == on){
-          tmpl.querySelector('.gameType').innerHTML = gameType + " at " + status;
-        }
-        // add it to the view
-        document.querySelector('#view').appendChild(tmpl);    
+
+        var gameType = childSnapshot.child("gameType").val();
+        var them = childSnapshot.child("them").val();
+        var location = childSnapshot.child("location").val();
+        var gDate = childSnapshot.child("gDate").val();
+        var gTime = childSnapshot.child("gTime").val();
+        var status = childSnapshot.child("status").val();
+        
+        
+        var tmpl = document.getElementById('previousGame').content.cloneNode(true);
+        tmpl.querySelector('.gDate').innerText = gDate + " at " + gTime;
+        tmpl.querySelector('.gLocation').innerText = location;
+        tmpl.querySelector('.matchUp').innerText = "My Team vs " + them;
+        tmpl.querySelector('.gameType').innerHTML = gameType + " at " + status;
+        document.querySelector('#viewPrevious').appendChild(tmpl); 
+        
         });      
     });
   });     
 }
+
+/*ESLint Problems: None */
+

@@ -11,11 +11,6 @@ function handleLogin() {
     password = document.getElementById("inputPassword").value;
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
     // Handle Errors here.
-    var errorCode = error.code,
-      errorMessage = error.message;
-
-    console.log(errorCode);
-    console.log(errorMessage);
   });
 }
 
@@ -30,9 +25,11 @@ firebase.auth().signOut().then(function () {
 firebase.auth().onAuthStateChanged(function (user) {
   "use strict";
   if (user) {
-    console.log("Welcome " + user.displayName + ": email = " + user.email);
+    //console.log("Welcome " + user.displayName + ": email = " + user.email);
     window.location = "/view-game-schedule.html";
   } else {
-    console.log("Goodbye");
+   // console.log("Goodbye");
   }
 });
+
+/*ESLint Problems: None */

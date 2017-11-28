@@ -108,3 +108,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
     window.location = "/view-game-schedule.html";
   }
 });
+
+/*ESLint Problems: None */

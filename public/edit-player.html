@@ -1,72 +1,24 @@
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- TODO meta
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-    -->
-
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="../../favicon.ico">
+      -->
     <title>TeamWatch</title>
-
     <!-- Bootstrap core CSS -->
     <link href="css/game-schedule-module.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js"></script>
- 
-
-
-<!-- for the picture input button -->
-<script type="text/javascript">
-  $(document).ready( function() {
-    $(document).on('change', '.btn-file :file', function() {
-      var input = $(this),
-      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-      input.trigger('fileselect', [label]);
-    });
-
-    $('.btn-file :file').on('fileselect', function(event, label) {
-      var input = $(this).parents('.input-group').find(':text'),
-      log = label;
-    });
-
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-            
-        reader.onload = function (e) {
-          $('#img-upload').attr('src', e.target.result);
-        }
-            
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $("#imgInp").change(function(){
-      readURL(this);
-    });   
-  });
-</script>
-
-
-
+    <link href="css/main.css" rel="stylesheet">
+    <!-- for the picture input button -->
   </head>
   <body class="with-nav">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="fa fa-bars fa-lg light"></span>
+      <span class="fa fa-bars fa-lg light"></span>
       </button>
       <a class="navbar-brand" href="view-game-schedule.html"><img class="mobile-hidden" src="images/logo.png" alt="teamwatch logo"><img class="desktop-hidden" src="images/logo-small.png" alt="teamwatch logo"></a>
       <!-- desktop-hidden navbar button -->
@@ -90,87 +42,75 @@
             <a class="nav-link" href="login.html">Log Out</a>
           </li>
         </ul>
-        <span class="mobile-hidden light"><a href="login.html" class="btn btn-primary" role="button">Log Out</a></span>
+        <span class="mobile-hidden light"><a href="login.html" onclick="handleLogout()" class="btn btn-primary" role="button">Log Out</a></span>
       </div>
     </nav>
-
     <main role="main" class="container mt-3 mt-md-1">
       <div class="row justify-content-center">
-
         <form class="jumbotron col-md-6 col-sm-12 mt-3 mt-md-5 bg-gray">
-          <legend class="edit-match-title">Add A New Player</legend>
-
-
+          <legend class="edit-match-title"> Edit Player</legend>
           <div class="row">
             <div class="col-sm-4">
               <div class="form-horizontal">
                 <img id='img-upload' class="profile-img"/>
               </div>
             </div>
-
             <div class="col-sm-6">
               <div class="form-horizontal">
                 <span class="input-group-btn">
-                  <span class="btn btn-default btn-file">
-                      Select Picture <input type="file" id="imgInp">
-                  </span>
+                <span class="btn btn-default btn-file">
+                Select Picture <input type="file" id="imgInp">
+                </span>
                 </span>
               </div>
             </div>
           </div>
-
-
           <div class="row">
             <div class="col-sm-4">
               <label for="addPlayerFName">First Name:</label>
             </div>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="addPlayerFName" placeholder="First name">
+              <input type="text" class="form-control" id="editPlayerFName" placeholder="First name">
             </div>
           </div>
-
-           <div class="row">
+          <div class="row">
             <div class="col-sm-4">
               <label for="addPlayerLName">Last Name:</label>
             </div>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="addPlayerLName" placeholder="Last name">
+              <input type="text" class="form-control" id="editPlayerLName" placeholder="Last name">
             </div>
           </div>
-
           <div class="row">
             <div class="col-sm-4">
               <label for="addPlayerEmail">Email:</label><br/>
             </div>
             <div class="col-sm-6">
-              <input type="email" class="form-control" id="addPlayerEmail" placeholder="Email">
+              <input type="email" class="form-control" id="editPlayerEmail" placeholder="Email">
             </div>
           </div>
-
           <div class="row">
             <div class="col-sm-4">
               <label for="addPlayerDOB">D.O.B:</label>
             </div>
             <div class="col-sm-6">
-              <input type="date" class="form-control" id="addPlayerDOB" placeholder="Date of Birth">
+              <input type="date" class="form-control" id="editPlayerDOB" placeholder="Date of Birth">
             </div>
           </div>
-
           <div class="row">
             <div class="col-sm-4">
               <label for="addPlayerJersey">Jersey #:</label>
             </div>
             <div class="col-sm-6">
-              <input type="number" class="form-control" id="addPlayerJersey" placeholder="Jersey Number">
+              <input type="number" class="form-control" id="editPlayerJersey" placeholder="Jersey Number">
             </div>
           </div>
-
           <div class="row">
             <div class="col-sm-4">
               <label for="addPlayerPosition">Position:</label>
             </div>
             <div class="col-sm-6">
-              <select class="form-control" id="addPlayerPosition">
+              <select class="form-control" id="editPlayerPosition">
                 <option>Forward</option>
                 <option>Striker</option>
                 <option>Defensive midfielder</option>
@@ -184,25 +124,26 @@
               </select>
             </div>
           </div>
-
-
-
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" class="form-check-input" id="captainCheck">Captain
+            <input type="checkbox" class="form-check-input" id="editCaptainCheck">Captain
             </label>
           </div>
-
-          <button type="button" class="btn btn-primary" onclick="handleAddPlayer()">Save</button>
-          <button type="button" class="btn add-player-btn-delete mobile-hidden">Delete</button>
-
+          <button type="button" class="btn btn-primary" onclick="handleSaveEdit()">Save</button>
+          <button type="button" class="btn add-player-btn-delete mobile-hidden" onclick="handleDeletePlayer()">Delete</button>
         </form>
-
-
       </div>
     </main>
-      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-      <script src="js/firebase.js"></script>
-      <script src="js/playersCrud.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/playersCrud.js"></script>
+    <script>handleEditPlayer()</script>
+    <script src="js/logOut.js"></script>   
   </body>
+    
+    <!-- Evaluations: 3G Connection with disabled caching 
+    576KB Transffered
+    DOMContentLoaded: 1.49s
+    Load: 2.34s
+    --> 
 </html>
