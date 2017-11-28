@@ -56,13 +56,10 @@
               </div>
             </div>
             <div class="col-sm-6">
-              <div class="form-horizontal">
-                <span class="input-group-btn">
-                <span class="btn btn-default btn-file">
-                Select Picture <input type="file" id="imgInp">
-                </span>
-                </span>
-              </div>
+              <label for="imgInp">
+                Select Picture
+              </label>
+              <input type="file" id="imgInp">
             </div>
           </div>
           <div class="row">
@@ -130,7 +127,7 @@
             </label>
           </div>
           <button type="button" class="btn btn-primary" onclick="handleSaveEdit()">Save</button>
-          <button type="button" class="btn add-player-btn-delete mobile-hidden" onclick="handleDeletePlayer()">Delete</button>
+          <button type="button" class="btn btn-danger" onclick="handleDeletePlayer()">Delete</button>
         </form>
       </div>
     </main>
