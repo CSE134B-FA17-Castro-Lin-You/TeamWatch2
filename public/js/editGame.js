@@ -11,10 +11,11 @@ var teamName;
 function handleUpdate(){
   "use strict";
   
-  var inputs = document.querySelectorAll('form-control');
+  var inputs = document.querySelectorAll('.form-control');
   
   if(parseInt(id, 10) > 0){
-    firebase.database().ref('/Games/GameId"' + id).update({
+    alert("updating. Opponent = " + inputs[0].value);
+    firebase.database().ref('/Games/GameId:' + id).update({
       them: inputs[0].value,
       location: inputs[1].value,
       gDate: inputs[2].value,
