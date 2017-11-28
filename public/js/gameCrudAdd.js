@@ -41,8 +41,7 @@ function handleUpdate() {
     firebase.database().ref('/Games/GameId:' + id).update({
       them: inputs[0].value,
       location: inputs[1].value,
-      gDate: inputs[2].value,
-      gTime: inputs[3].value
+      datetime: inputs[2].value
     }).then(function (res) {
       window.location = "/view-game-schedule.html";
     });
@@ -60,7 +59,6 @@ function handleReadGame(){
       var them = childSnapshot.child("them").val();
       var location = childSnapshot.child("location").val();
       var datetime = childSnapshot.child("datetime").val();
-
       var status = childSnapshot.child("status").val();
 
 
@@ -68,7 +66,7 @@ function handleReadGame(){
       tmpl.querySelector('.datetime').innerText = datetime;
       tmpl.querySelector('.gLocation').innerText = location;
       tmpl.querySelector('.matchUp').innerText = "My Team vs " + them;
-      tmpl.querySelector('.gameType').innerHTML = gameType + " at " + status;
+      tmpl.querySelector('.gameType').innerHTML = status + " : " + gameType;
       document.querySelector('#viewPrevious').appendChild(tmpl); 
 
       });      

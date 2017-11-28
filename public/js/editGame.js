@@ -17,8 +17,7 @@ function handleUpdate(){
     firebase.database().ref('/Games/GameId:' + id).update({
       them: inputs[0].value,
       location: inputs[1].value,
-      gDate: inputs[2].value,
-      gTime: inputs[3].value
+      datetime: inputs[2].value
     }).then(function(res) {
         window.location="/view-game-schedule.html";
     });
@@ -55,9 +54,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         window.location = "/view-game-schedule.html";
       }
 
-      var gDate = snapshot.child('gDate'),
+      var datetime = snapshot.child('datetime'),
       location = snapshot.child('location'),
-      gTime = snapshot.child('gTime'),
       // gameType = snapshot.child('gameType'),
       them = snapshot.child('them'),
       // status = snapshot.child('status'),
@@ -66,12 +64,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
       inputs[0].value = them.val();
       inputs[1].value = location.val();
-      inputs[2].value = gDate.val();
-      inputs[3].value = gTime.val();
+      inputs[2].value = datetime.val();
       
-      /*
-      document.getElementById('them').innerHTML = themName.val();
-      document.getElementById('us').innerHTML = teamName.val();*/
     });
   } else {
     alert('Not a valid game');
