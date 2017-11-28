@@ -16,65 +16,8 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
-
-
-
-    <script>
- /*$(function () {
-   var bindDatePicker = function() {
-		$(".date").datetimepicker({
-        format:'DD-MM-YYYY HH-mm',
-			icons: {
-				time: "fa fa-clock-o",
-				date: "fa fa-calendar",
-				up: "fa fa-arrow-up",
-				down: "fa fa-arrow-down"
-			}
-		}).find('input:first').on("blur",function () {
-			// check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
-			// update the format if it's yyyy-mm-dd
-			var date = parseDate($(this).val());
- 
-			if (! isValidDate(date)) {
-				//create date based on momentjs (we have that)
-				date = moment().format('DD-MM-YYYY HH-mm');
-			}
- 
-			$(this).val(date);
-		});
-	}
- 
-   var isValidDate = function(value, format) {
-		format = format || false;
-		// lets parse the date to the best of our knowledge
-		if (format) {
-			value = parseDate(value);
-		}
- 
-		var timestamp = Date.parse(value);
- 
-		return isNaN(timestamp) == false;
-   }
- 
-   var parseDate = function(value) {
-		var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
-		if (m)
-			value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
-			var h = d.getHours();
-        h = (h < 10) ? ("0" + h) : h ;
- 
-        var m = d.getMinutes();
-        m = (m < 10) ? ("0" + m) : m ;
- 
-		return value;
-   }
- 
-   bindDatePicker();
- });*/
- </script>     
-</head>
-
+    <link href="css/main.css" rel="stylesheet">  
+  </head>
   
  <body class="with-nav">
 
@@ -168,12 +111,9 @@
             </div>
           </div>    
           
-          <!--<button type="button" onclick="handleSaveGame()" class="btn btn-lg center-block">Save</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="handleUpdate()">Save</button>
+        <button type="button" class="btn btn-danger btn-lg" onclick="handleDelete()">Delete</button>
           
-          <button type="button" onclick="handleDeleteGame()" class="btn btn-lg center-block">Delete</button> -->
-          <button type="submit" class="btn btn-lg center-block">Save</button>
-          
-          <button type="button" onclick="handleDeleteGame()" class="btn btn-lg center-block">Delete</button>
         </form>
       </div>
     </main>
@@ -182,9 +122,10 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="js/firebase.js"></script>
     <script src="js/editGame.js"></script>
-   <script src="js/navbar.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="js/logOut.js"></script>
     </body>
+
     <!-- Evaluations: 3G Connection with disabled caching 
     234KB Transffered
     DOMContentLoaded: 2.44s
