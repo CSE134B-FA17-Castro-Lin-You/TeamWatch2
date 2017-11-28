@@ -14,7 +14,6 @@ function handleUpdate(){
   var inputs = document.querySelectorAll('.form-control');
   
   if(parseInt(id, 10) > 0){
-    alert("updating. Opponent = " + inputs[0].value);
     firebase.database().ref('/Games/GameId:' + id).update({
       them: inputs[0].value,
       location: inputs[1].value,

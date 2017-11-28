@@ -82,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     teamName = snapshot.child('TeamName');
     id = snapshot.child('GameCounter').val();
     firebase.database().ref('/Globals/GameCounter').set(parseInt(id, 10) + 1);
-    handleReadGame();
   });
   
   
