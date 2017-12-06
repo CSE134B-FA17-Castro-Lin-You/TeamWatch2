@@ -15,6 +15,16 @@ function handleAddPlayer() {
   var e = document.getElementById("addPlayerPosition");
   var position = e.options[e.selectedIndex].text;
   var captainCheck = document.getElementById("captainCheck").value;
+    
+  var fullPath = document.getElementById('imgInp').value;
+  if (fullPath) {
+        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+        var filename = fullPath.substring(startIndex);
+        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+            filename = filename.substring(1);
+        }
+        fullPath = filename;
+  }        
 
   if (captainCheck != "on") {
     // toggle some attribute in html
@@ -28,12 +38,30 @@ function handleAddPlayer() {
       dob: dob,
       jersey:jersey,
       position:position,
-      captainCheck: captainCheck
+      captainCheck: captainCheck,
+      profilePic: fullPath
       
   }).then(function onSuccess(res) {
-      window.location = "/teamstats.html";
-  }).catch(function onError(err) {  
-  });
+     var fullPath = document.getElementById('imgInp').value;
+     var actualFile = null;
+     var fileButton = document.getElementById('imgInp');
+     actualFile = fileButton.files[0];  
+    
+      
+      if(fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            fullPath = filename;
+      } 
+      
+      var storageRef = firebase.storage().ref('profile-pictures/' + actualFile.name);
+      storageRef.put(actualFile).then(function(snapshot){
+       window.location = "/teamstats.html";
+    });
+  })
     
 }
 
@@ -41,30 +69,46 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+
 function handleRead(){
+     var dob = 0;
+     var fName = 0; 
+     var jersey = 0;
+     var lName = 0;    
+     var position = 0;
     window.addEventListener('DOMContentLoaded', function () {
-        var query = firebase.database().ref("Players").orderByKey();
+        var query = firebase.database().ref('Players');
         query.once("value").then(function(snapshot) {
             snapshot.forEach(function(childSnapshot){
-            var dob = childSnapshot.child("dob").val();
-            var fName = childSnapshot.child("fName").val();  
-            var jersey = "Jersey #" + childSnapshot.child("jersey").val();
-            var lName = childSnapshot.child("lName").val();    
-            var position = childSnapshot.child("position").val();
-                
-
+            dob = childSnapshot.child("dob").val();
+            fName = childSnapshot.child("fName").val();  
+            jersey = "Jersey #" + childSnapshot.child("jersey").val();
+            lName = childSnapshot.child("lName").val();    
+            position = childSnapshot.child("position").val();
+            var profilePic = childSnapshot.child("profilePic").val();    
+            
+            var tmpl = document.getElementById('rosterTemplate').content.cloneNode(true);
             fName = capitalizeFirstLetter(fName);
             lName = capitalizeFirstLetter(lName);
-            var tmpl = document.getElementById('rosterTemplate').content.cloneNode(true);
             tmpl.querySelector('.playerName').innerText = fName + " " + lName ;
             tmpl.querySelector('.playerPosition').innerText = position;
             tmpl.querySelector('.playerJersey').innerText = jersey;
             tmpl.querySelector('.playerDOB').innerHTML = dob;
-            tmpl.querySelector('#viewPlayerButton').value = jersey;
+            tmpl.querySelector('#viewPlayerButton').value = jersey;      
             // add it to the view
-            document.querySelector('#view').appendChild(tmpl);    
+            var folderRef = firebase.storage().ref().child( "profile-pictures/" );
+            var contentRef = folderRef.child(profilePic);
+
+            //Dynamically set the content
+            contentRef.getDownloadURL().then(function( url ){
+                tmpl.querySelector('#playerPic').src = url;
+                document.querySelector('#view').appendChild(tmpl);
+            })    
+                
+           
             });      
-        });
+        })
+    
       });
 }
 
@@ -91,7 +135,8 @@ function handleReadForViewPlayer(){
             var jersey = "Jersey #" + snapshot.child("jersey").val();
             var lName = snapshot.child("lName").val();
             var position = snapshot.child("position").val();
-
+            var profilePic = snapshot.child("profilePic").val();
+            
             fName = capitalizeFirstLetter(fName);
             lName = capitalizeFirstLetter(lName);
             var tmpl = document.getElementById('viewPlayerTemplate').content.cloneNode(true);
@@ -99,13 +144,22 @@ function handleReadForViewPlayer(){
             tmpl.querySelector('.viewplayerPosition').innerText = position;
             tmpl.querySelector('.viewplayerJersey').innerText = jersey;
             tmpl.querySelector('.viewplayerDOB').innerHTML = dob;
+            var folderRef = firebase.storage().ref().child( "profile-pictures/" );
+            var contentRef = folderRef.child(profilePic);
+
+            //Dynamically set the content
+            contentRef.getDownloadURL().then(function( url ){
+                tmpl.querySelector('#playerPicture').src = url;
+                document.querySelector('#viewPlayerView').appendChild(tmpl);
+            })
             // add it to the view
-            document.querySelector('#viewPlayerView').appendChild(tmpl);          
+                      
         });
       });
 }
 
 function handleEditPlayer(){
+   
     var jNum = localStorage.getItem("jerseyNumber");
     var query = firebase.database().ref('Players/JerseyNumber' +jNum);
     query.once("value").then(function(snapshot) {
@@ -141,12 +195,19 @@ function handleSaveEdit() {
   var e = document.getElementById("editPlayerPosition");
   var position = e.options[e.selectedIndex].text;
   var captainCheck = document.getElementById("editCaptainCheck").checked;
-
+  var fullPath = document.getElementById('imgInp').value;
+  if (fullPath) {
+        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+        var filename = fullPath.substring(startIndex);
+        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+            filename = filename.substring(1);
+        }
+        fullPath = filename;
+  }    
   if (captainCheck != "on") {
     // toggle some attribute in html
-    // TODO form validation & noty user by modifying hidden HTML elements
-  }
-
+    // TODO form validation & notiy user by modifying hidden HTML elements
+  }   
   firebase.database().ref('/Players/' + "JerseyNumber" + jersey).set({
       fName: fName,
       lName: lName,
@@ -154,13 +215,35 @@ function handleSaveEdit() {
       dob: dob,
       jersey:jersey,
       position:position,
-      captainCheck: captainCheck
+      captainCheck: captainCheck,
+      profilePic: fullPath  
       
   }).then(function onSuccess(res) {
-      window.location = "/teamstats.html";
-  }).catch(function onError(err) {  
-  });
-  window.location = "/teamstats.html";    
+     var fullPath = document.getElementById('imgInp').value;
+     var actualFile = null;
+     var fileButton = document.getElementById('imgInp');
+     actualFile = fileButton.files[0];  
+    
+      
+      if(fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            fullPath = filename;
+      } 
+      
+      var storageRef = firebase.storage().ref('profile-pictures/' + actualFile.name);
+      storageRef.put(actualFile).then(function(snapshot){
+       window.location = "/teamstats.html";
+    });
+     
+  })
+}
+
+function handleSave(){
+  handleSaveEdit();    
 }
 
 function handleDeletePlayer(){
