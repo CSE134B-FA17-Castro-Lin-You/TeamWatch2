@@ -47,9 +47,10 @@
     <main role="main" class="container">
       <!-- Page Heading -->
       <h1 class="my-4">
-        Team Stats
+        Team Stats 
         <small>for My Team</small>
       </h1>
+      <p><a href="edit-team-stats.html" class="btn btn-primary" role="button">Edit Team Stats</a></p>  
       <table class="table table-responsive">
         <thead>
           <tr>
@@ -62,11 +63,11 @@
         </thead>
         <tbody>
           <tr>
-            <td>456</td>
-            <td>412</td>
-            <td>3</td>
-            <td>1234</td>
-            <td>1123</td>
+            <td id="team-wins">456</td>
+            <td id="team-losses">412</td>
+            <td id="team-ties">3</td>
+            <td id="team-goals-for">1234</td>
+            <td id="team-goals-against">1123</td>
           </tr>
         </tbody>
       </table>
@@ -144,6 +145,8 @@
     <script src="js/playersCrud.js"></script>
     <script>handleRead()</script>
     <script src="js/logOut.js"></script>  
+    <script src="js/teamStatsCrud.js"></script>
+    <script>handleTeamStatsRead()</script>  
   </body>
     
    <!-- Evaluations: 3G Connection with disabled  caching 
