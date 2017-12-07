@@ -245,7 +245,6 @@ function handleEditPlayer(){
             document.getElementById('p-penalty-kicks').value = penaltyKick;
             document.getElementById('p-throw-ins').value = throwIn;
             
-        
             document.getElementById("editPlayerFName").value = fName;
             document.getElementById("editPlayerLName").value = lName;
             document.getElementById("editPlayerPosition").value = position;
