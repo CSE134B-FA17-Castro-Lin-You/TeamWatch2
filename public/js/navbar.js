@@ -27,4 +27,19 @@ window.onclick = function (e) {
     }
   }
 };
+
+//function permission(){
+  //"use strict";
+  
+  /* get current user */
+  //firebase.auth().onAuthStateChanged(function (user) {
+    //if (user) {
+      /* if user is fan */
+      /* if user is coach */
+      /* if user is manager */
+      
+    //} 
+  //});
+  
+//}
 /* END navbar code */

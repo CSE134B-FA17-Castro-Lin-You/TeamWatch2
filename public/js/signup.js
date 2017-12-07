@@ -11,6 +11,7 @@ function handleSignUp() {
     lName = document.getElementById("inputLName").value.trim(),
     email = document.getElementById("inputEmail").value.trim(),
     password = document.getElementById("inputPassword").value,
+    code = document.getElementById("inputCode").value,
     tos = document.getElementById("tosAgree").checked;
 
   if (!tos) {
@@ -34,7 +35,8 @@ function handleSignUp() {
         fName: fName,
         lName: lName,
         email: email,
-        tos: tos
+        tos: tos,
+        code: code
       }).then(function onSuccess(res) {
         window.location = "/view-game-schedule.html";
       }).catch(function onError(err) {
