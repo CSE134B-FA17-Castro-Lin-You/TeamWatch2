@@ -110,8 +110,8 @@ function handleRead(){
             tmpl.querySelector('.playerJersey').innerText = jersey;
             tmpl.querySelector('.playerDOB').innerHTML = dob;
             tmpl.querySelector('#viewPlayerButton').value = jersey; 
-            tmpl.querySelector('#career-goals').innerHTML = careerGoals;
-            tmpl.querySelector('#career-appearances').innerHTML = careerAppearances;      
+            tmpl.querySelector('#careerGoals').innerHTML = careerGoals;
+            tmpl.querySelector('#careerAppearances').innerHTML = careerAppearances;      
             // add it to the view
             var folderRef = firebase.storage().ref().child( "profile-pictures/" );
             var contentRef = folderRef.child(profilePic);
@@ -187,8 +187,8 @@ function handleReadForViewPlayer(){
             tmpl.querySelector('.viewplayerPosition').innerText = position;
             tmpl.querySelector('.viewplayerJersey').innerText = jersey;
             tmpl.querySelector('.viewplayerDOB').innerHTML = dob;
-            tmpl.querySelector('#player-career-goals').innerText = careerGoals;
-            tmpl.querySelector('#player-career-appearances').innerHTML = careerAppearances;
+            tmpl.querySelector('#viewPlayerCareerGoals').innerHTML = careerGoals;
+            tmpl.querySelector('#viewCareerAppearances').innerHTML = careerAppearances;
             
             if(profilePic){
                 var folderRef = firebase.storage().ref().child( "profile-pictures/" );
@@ -230,11 +230,10 @@ function handleEditPlayer(){
             var goalKick = snapshot.child("goalKicks").val();
             var penaltyKick = snapshot.child("penaltyKicks").val();
             var throwIn = snapshot.child("throwIns").val();
-        
-            var careerAppearances = snapshot.child("careerAppearances").val();  
+            var careerAppearance = snapshot.child("careerAppearances").val();  
+            console.log(careerAppearance);
             
             
-            document.getElementById('p-career-appearances').value = careerAppearances;
             document.getElementById('p-fouls').value = foul;
             document.getElementById('p-red-cards').value = redCard;
             document.getElementById('p-yellow-cards').value = yellowCard;
@@ -244,13 +243,15 @@ function handleEditPlayer(){
             document.getElementById('p-goal-kicks').value = goalKick;
             document.getElementById('p-penalty-kicks').value = penaltyKick;
             document.getElementById('p-throw-ins').value = throwIn;
-            
+             document.getElementById('editPlayerCareerAppearances').value = careerAppearance;    
+        
             document.getElementById("editPlayerFName").value = fName;
             document.getElementById("editPlayerLName").value = lName;
             document.getElementById("editPlayerPosition").value = position;
             document.getElementById("editPlayerJersey").value = jersey;
             document.getElementById("editPlayerDOB").value = dob;
             document.getElementById("editPlayerEmail").value = email;
+           
             if(checkBox == true){
                 document.getElementById("editCaptainCheck").checked = true;
             }
@@ -281,7 +282,7 @@ function handleSaveEdit() {
   var goalKicks = document.getElementById('p-goal-kicks').value;
   var penaltyKicks = document.getElementById('p-penalty-kicks').value;
   var throwIns = document.getElementById('p-throw-ins').value;
-  var careerAppearances = document.getElementById('p-career-appearances').value;    
+  var careerAppearances = document.getElementById('editPlayerCareerAppearances').value;    
   
   if (fullPath) {
         var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
