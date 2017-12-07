@@ -295,18 +295,21 @@ function handleSaveEdit() {
   var profilePicture = localStorage.getItem("profilePic");  
    
       
-  if (fullPath) {
-        var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-        var filename = fullPath.substring(startIndex);
-        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-            filename = filename.substring(1);
-        }
-        fullPath = filename;
-  }  
+ 
     
   if(profilePicture && !fullPath){
       fullPath = profilePicture;
-  }   
+  } 
+  else{
+        if (fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+            fullPath = filename;
+        } 
+  }    
     
   if (captainCheck != "on") {
     // toggle some attribute in html
