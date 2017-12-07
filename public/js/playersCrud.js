@@ -294,8 +294,6 @@ function handleSaveEdit() {
   var careerAppearances = document.getElementById('editPlayerCareerAppearances').value;     
   var profilePicture = localStorage.getItem("profilePic");  
    
-      
- 
     
   if(profilePicture && !fullPath){
       fullPath = profilePicture;

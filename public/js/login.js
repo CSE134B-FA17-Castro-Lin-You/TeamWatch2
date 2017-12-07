@@ -14,13 +14,6 @@ function handleLogin() {
   });
 }
 
-firebase.auth().signOut().then(function () {
-  // Sign-out successful.
-  "use strict";
-}, function (error) {
-  // An error happened.
-  "use strict";
-});
 
 firebase.auth().onAuthStateChanged(function (user) {
   "use strict";

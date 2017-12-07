@@ -6,12 +6,14 @@
 /*eslint no-unused-vars: ["error", { "vars": "local", "args": "none" }]*/
 
 function handleLogout(){
-    firebase.auth().signOut().then(function () {
+   firebase.auth().signOut().then(function () {
       // Sign-out successful.
+        window.location = "/login.html";
       "use strict";
     }, function (error) {
       // An error happened.
       "use strict";
+       window.location = "/login.html";
     });
 
 }
