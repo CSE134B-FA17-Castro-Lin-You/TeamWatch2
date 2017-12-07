@@ -209,7 +209,6 @@ function handleReadForViewPlayer(){
 }
 
 function handleEditPlayer(){
-   
     var jNum = localStorage.getItem("jerseyNumber");
     var query = firebase.database().ref('Players/JerseyNumber' +jNum);
     query.once("value").then(function(snapshot) {
@@ -231,8 +230,6 @@ function handleEditPlayer(){
             var penaltyKick = snapshot.child("penaltyKicks").val();
             var throwIn = snapshot.child("throwIns").val();
             var careerAppearance = snapshot.child("careerAppearances").val();  
-            console.log(careerAppearance);
-            
             
             document.getElementById('p-fouls').value = foul;
             document.getElementById('p-red-cards').value = redCard;
