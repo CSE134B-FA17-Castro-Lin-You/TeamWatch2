@@ -13,6 +13,9 @@ function handleSignUp() {
     password = document.getElementById("inputPassword").value,
     tos = document.getElementById("tosAgree").checked;
 
+  var coach = document.getElementById("sign-up-coach").checked;
+  var manager = document.getElementById("sign-up-manager").checked;
+  var other = document.getElementById("sign-up-other").checked;
   if (!tos) {
     // toggle some attribute in html
     // TODO form validation & notify user by modifying hidden HTML elements
@@ -34,8 +37,12 @@ function handleSignUp() {
         fName: fName,
         lName: lName,
         email: email,
-        tos: tos
+        tos: tos,
+        coach: coach,
+        manager: manager,
+        other: other
       }).then(function onSuccess(res) {
+        localStorage.setItem("user",user.uid);   
         window.location = "/view-game-schedule.html";
       }).catch(function onError(err) {
         // Handle Error
@@ -43,13 +50,6 @@ function handleSignUp() {
     } 
   });
 }
-/*
-firebase.auth().signOut().then(function () {
-  // Sign-out successful.
-  "use strict";
-}, function (error) {
-  // An error happened.
-  "use strict";
-});*/
+
 
 /*ESLint Problems: None */

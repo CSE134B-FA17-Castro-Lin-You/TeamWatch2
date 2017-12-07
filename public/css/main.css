@@ -43,6 +43,9 @@ p.eventField{
     margin: auto;
 }
 
+.signUp{
+  margin: 0 0 0 20px;
+}
 
 hr.scheduleHr{
     width:100% ;

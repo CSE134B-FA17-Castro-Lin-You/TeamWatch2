@@ -40,12 +40,17 @@
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
           </div>
-          <div class="form-check">
+          <div>
+             <input id="sign-up-coach" type="radio" name="user" value="coach" required> Coach
+             <input id="sign-up-manager" class="signUp" type="radio" name="user" value="manager" required> Manager
+             <input id="sign-up-other" class="signUp" type="radio" name="user" value="other" required> Other 
+          </div>   
+         <div class="form-check">
             <label class="form-check-label">
               <input type="checkbox" class="form-check-input" id="tosAgree" required>
               I agree to the Terms of Service
             </label>
-          </div>
+          </div>    
           <button type="button" class="btn btn-primary" onclick="handleSignUp()">Submit</button>
         </form>
       </div>

@@ -21,7 +21,7 @@
       </button>
       <a class="navbar-brand" href="view-game-schedule.html"><img class="mobile-hidden" src="images/logo.png" alt="teamwatch logo"><img class="desktop-hidden" src="images/logo-small.png" alt="teamwatch logo"></a>
       <!-- desktop-hidden navbar button -->
-      <a href="add-player.html" class="btn btn-primary desktop-hidden" role="button"><span class="fa fa-user-plus fa-lg light"></span></a>
+      <a id="nav-add-player" href="add-player.html" class="btn btn-primary desktop-hidden" role="button"><span class="fa fa-user-plus fa-lg light"></span></a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -50,7 +50,7 @@
         Team Stats 
         <small>for My Team</small>
       </h1>
-      <p><a href="edit-team-stats.html" class="btn btn-primary" role="button">Edit Team Stats</a></p>  
+      <p><a id="edit-team-stats-button" href="edit-team-stats.html" class="btn btn-primary" role="button">Edit Team Stats</a></p>  
       <table class="table table-responsive">
         <thead>
           <tr>
@@ -75,7 +75,7 @@
         Player Roster
       </h2>
       <!-- mobile-hidden add/edit button -->
-      <p class="mobile-hidden light"><a href="add-player.html" class="btn btn-primary" role="button">Add a New Player</a></p>
+      <p class="mobile-hidden light"><a id="add-player-button" href="add-player.html" class="btn btn-primary" role="button">Add a New Player</a></p>
       <div id="view"></div>
       <template id=rosterTemplate>
         <!-- Player One -->

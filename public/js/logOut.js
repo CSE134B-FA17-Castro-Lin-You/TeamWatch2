@@ -8,12 +8,15 @@
 function handleLogout(){
    firebase.auth().signOut().then(function () {
       // Sign-out successful.
+        localStorage.removeItem("user");
         window.location = "/login.html";
       "use strict";
     }, function (error) {
       // An error happened.
       "use strict";
+       localStorage.removeItem("user");
        window.location = "/login.html";
+       
     });
 
 }

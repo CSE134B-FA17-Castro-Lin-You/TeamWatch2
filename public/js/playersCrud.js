@@ -88,6 +88,25 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function handleAccessTeamStats(){
+    var userId = localStorage.getItem("user");
+    if(userId != null){
+        var query = firebase.database().ref('Users/' + userId);
+        query.once("value").then(function(snapshot) {
+                var coach = snapshot.child("coach").val();
+                var manager = snapshot.child("manager").val();
+
+                if(coach == false && manager == false){
+                    var editButton = document.getElementById('edit-team-stats-button');
+                    var addButton = document.getElementById('add-player-button');
+                    editButton.style.display = 'none';
+                    addButton.style.display = 'none';
+                }
+
+            })
+    }
+}
+
 /*Handles the population of roster template*/
 function handleRead(){
      var dob = 0;
@@ -95,6 +114,7 @@ function handleRead(){
      var jersey = 0;
      var lName = 0;    
      var position = 0;
+    handleAccessTeamStats();
     window.addEventListener('DOMContentLoaded', function () {
         var query = firebase.database().ref('Players');
         query.once("value").then(function(snapshot) {
