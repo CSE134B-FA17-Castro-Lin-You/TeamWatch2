@@ -6,7 +6,10 @@
 /*eslint no-undef: "error"*/
 /*eslint no-unused-vars: ["error", { "vars": "local", "args": "none" }]*/
 
+
+/*Handles the functionality to add players to the team roster*/
 function handleAddPlayer() {
+  /*Get the first name, last name, email, jersey number, position, and captain check from input fields.*/
   var fName = document.getElementById("addPlayerFName").value.trim();
   var lName = document.getElementById("addPlayerLName").value.trim();
   var email = document.getElementById("addPlayerEmail").value.trim();
@@ -16,6 +19,7 @@ function handleAddPlayer() {
   var position = e.options[e.selectedIndex].text;
   var captainCheck = document.getElementById("captainCheck").checked;
     
+  /*Get the image from the input file*/    
   var fullPath = document.getElementById('imgInp').value;
   if (fullPath) {
         var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
@@ -31,6 +35,7 @@ function handleAddPlayer() {
     // TODO form validation & noty user by modifying hidden HTML elements
   }
 
+  /*Save player details to firebase*/       
   firebase.database().ref('/Players/' + "JerseyNumber" + jersey).set({
       fName: fName,
       lName: lName,
@@ -78,11 +83,12 @@ function handleAddPlayer() {
     
 }
 
+/*Function to capitalize the first letter of word*/
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-
+/*Handles the population of roster template*/
 function handleRead(){
      var dob = 0;
      var fName = 0; 
@@ -133,6 +139,7 @@ function handleRead(){
       });
 }
 
+/*Saves player jersey number to local storage*/
 function saveJerseyNum(objButton){
     var fired_button = objButton.value;
     fired_button = fired_button.split('#').pop();        
@@ -146,6 +153,7 @@ function getJerseyNum(){
     
 }
 
+/*Populates the template for viewing the stats of one player*/
 function handleReadForViewPlayer(){
     var jNum = localStorage.getItem("jerseyNumber");
     window.addEventListener('DOMContentLoaded', function () {
@@ -208,6 +216,7 @@ function handleReadForViewPlayer(){
       });
 }
 
+/*Handles the functionality to edit player stats*/
 function handleEditPlayer(){
     var jNum = localStorage.getItem("jerseyNumber");
     var query = firebase.database().ref('Players/JerseyNumber' +jNum);
@@ -230,7 +239,9 @@ function handleEditPlayer(){
             var penaltyKick = snapshot.child("penaltyKicks").val();
             var throwIn = snapshot.child("throwIns").val();
             var careerAppearance = snapshot.child("careerAppearances").val();  
-            
+            var profilePic = snapshot.child("profilePic").val();
+            localStorage.setItem("profilePic", profilePic);   
+        
             document.getElementById('p-fouls').value = foul;
             document.getElementById('p-red-cards').value = redCard;
             document.getElementById('p-yellow-cards').value = yellowCard;
@@ -259,6 +270,7 @@ function handleEditPlayer(){
     
 }
 
+/*Handles the functionality of saving changes to player stats to firebase*/
 function handleSaveEdit() {
   var fName = document.getElementById("editPlayerFName").value.trim();
   var lName = document.getElementById("editPlayerLName").value.trim();
@@ -279,8 +291,10 @@ function handleSaveEdit() {
   var goalKicks = document.getElementById('p-goal-kicks').value;
   var penaltyKicks = document.getElementById('p-penalty-kicks').value;
   var throwIns = document.getElementById('p-throw-ins').value;
-  var careerAppearances = document.getElementById('editPlayerCareerAppearances').value;    
-  
+  var careerAppearances = document.getElementById('editPlayerCareerAppearances').value;     
+  var profilePicture = localStorage.getItem("profilePic");  
+   
+      
   if (fullPath) {
         var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
         var filename = fullPath.substring(startIndex);
@@ -288,7 +302,12 @@ function handleSaveEdit() {
             filename = filename.substring(1);
         }
         fullPath = filename;
-  }    
+  }  
+    
+  if(profilePicture && !fullPath){
+      fullPath = profilePicture;
+  }   
+    
   if (captainCheck != "on") {
     // toggle some attribute in html
     // TODO form validation & notiy user by modifying hidden HTML elements
@@ -331,15 +350,15 @@ function handleSaveEdit() {
       } 
       
       if(actualFile == null){
-          window.location = "/teamstats.html";
+          window.location = "/view-player.html";
       }
-      var storageRef = firebase.storage().ref('profile-pictures/' + actualFile.name);
-      storageRef.put(actualFile).then(function(snapshot){
-       window.location = "/teamstats.html";
-    }).then(function(error){
-          window.location = "/teamstats.html";
-      });
-     
+      else{
+          var storageRef = firebase.storage().ref('profile-pictures/' + actualFile.name);
+          storageRef.put(actualFile).then(function(snapshot){ window.location = "/view-player.html";
+            }).then(function(error){
+              window.location = "/view-player.html";
+            });
+      }
   })
 }
 
@@ -347,6 +366,7 @@ function handleSave(){
   handleSaveEdit();    
 }
 
+/*Deletes a player from the roster*/
 function handleDeletePlayer(){
     var jNum = localStorage.getItem("jerseyNumber");
     firebase.database().ref('Players/JerseyNumber' +jNum).remove();
