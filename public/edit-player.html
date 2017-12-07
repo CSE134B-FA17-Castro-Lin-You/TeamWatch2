@@ -121,6 +121,7 @@
               </select>
             </div>
           </div>
+            
           <div class="row">
             <div class="col-sm-4">
               <label for="foul">Fouls:</label>
@@ -193,7 +194,7 @@
             </div>
           </div>
             
-             <div class="row">
+          <div class="row">
             <div class="col-sm-4">
               <label for="foul">Throw Ins:</label>
             </div>
@@ -202,11 +203,21 @@
             </div>
           </div>
             
+          <div class="row">
+            <div class="col-sm-4">
+              <label for="foul">Career Appearances:</label>
+            </div>
+            <div class="col-sm-6">
+              <input type="number" class="form-control" id="p-career-appearrances" placeholder="Career Appearances">
+            </div>
+          </div>     
+            
           <div class="form-check">
             <label class="form-check-label">
             <input type="checkbox" class="form-check-input" id="editCaptainCheck">Captain
             </label>
           </div>
+            
           <button type="button" class="btn btn-primary" onclick="handleSave()">Save</button>
           <button type="button" class="btn btn-danger" onclick="handleDeletePlayer()">Delete</button>
         </form>
