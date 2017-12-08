@@ -117,7 +117,6 @@ function handleDelete() {
 function saveGame(objButton){
   var fired_button = objButton.value;
   localStorage.setItem("datetime", fired_button);
-  alert("local storage @ gameCrud saving datetime as " + fired_button);
 }
 
 
@@ -165,7 +164,6 @@ function handleEditGamePage(){
   //id = url.searchParams.get("id");
   
   var datetime = localStorage.getItem("datetime");
-  alert("date time on edit game is " + datetime);
     
   if (datetime != null) {
     firebase.database().ref('/Games/' + datetime).once('value').then(function (snapshot) {
@@ -188,7 +186,7 @@ function handleEditGamePage(){
       
     });
   } else {
-    alert('Not a valid game, ' + datetime);
+    alert('Not a valid game');
     window.location = "/view-game-schedule.html";
   }
 });

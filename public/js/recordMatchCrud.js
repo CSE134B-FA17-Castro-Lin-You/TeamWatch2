@@ -75,3 +75,57 @@ document.addEventListener("DOMContentLoaded", function (event) {
     firebase.database().ref('/Globals/GameCounter').set(parseInt(id, 10) + 1);
   });
 })
+
+
+
+function handleChooseDate(){
+  
+  var dropdown = document.getElementById("datetimeDropdown");
+  var query = firebase.database().ref("Games").orderByKey();
+
+  query.once("value").then(function(snapshot){
+
+  snapshot.forEach(function(childSnapshot){ // looping
+
+    var datetime = childSnapshot.child("datetime").val();
+    
+    var option = document.createElement("option");
+    option.text = datetime;
+
+    dropdown.add(option);
+    })
+  })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*
+  
+  alert("calling choose date to populate dropdown");
+  var query = firebase.database().ref("Games").orderByKey();
+  
+  query.once("value").then(function(snapshot){
+    
+    snapshot.forEach(function(childSnapshot){
+      
+      var datetime = childSnapshot.child("datetime").val();
+      alert("populating " + datetime);
+      
+      var tmpl = document.getElementById('datetimeTemplate').content.cloneNode(true);
+      tmpl.querySelector('.datetimeOption').innerText = datetime;
+      document.querySelector('.datetimeList').appendChild(tmpl); // div id
+    })
+  })*/
+}
