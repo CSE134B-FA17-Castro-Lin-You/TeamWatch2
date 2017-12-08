@@ -255,16 +255,21 @@ function handleReadMatchstats(){
     document.getElementById('cornerKicksFor').innerHTML = cornerFor;
     document.getElementById('goalKicksFor').innerHTML = goalKickFor;
     document.getElementById('possessionTimeFor').innerHTML = timeFor;
-      
-      
-
   });
 
-var query = firebase.database().ref('/Games/' + id);    
-query.once("value").then(function(snapshot){
-  var opponent = snapshot.child('them').val();
-  document.getElementById('my-team-vs-opponent').innerHTML = "My Team vs " + opponent; 
-});    
+  var query = firebase.database().ref('/Games/' + id);    
+  query.once("value").then(function(snapshot){
+    
+    var opponent = snapshot.child('them').val();
+    var datetime = snapshot.child("datetime").val();
+    var location = snapshot.child("location").val();
+    var gameType = snapshot.child("gameType").val();
+    
+    document.getElementById('my-team-vs-opponent').innerHTML = "My Team vs " + opponent; 
+    document.getElementById('datetimeLabel').innerHTML = datetime;
+    document.getElementById('locationLabel').innerHTML = location;
+    document.getElementById('gameTypeLabel').innerHTML = gameType;
+  });    
      
     
   themQuery.once("value").then(function(snapshot){
@@ -287,8 +292,7 @@ query.once("value").then(function(snapshot){
     document.getElementById('possessionTimeAgainst').innerHTML = timeAgainst;
   });
   
-  
-  
+
     
 }
 
