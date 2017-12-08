@@ -64,3 +64,4 @@ function handleTeamStatsSave(){
 function handleTeamStatsCancel(){
      window.location = "/teamstats.html";
 }
+

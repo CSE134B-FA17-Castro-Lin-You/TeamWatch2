@@ -96,11 +96,31 @@ function handleAccessTeamStats(){
                 var coach = snapshot.child("coach").val();
                 var manager = snapshot.child("manager").val();
 
-                if(coach == false && manager == false){
+                if(coach == true || manager == true){
                     var editButton = document.getElementById('edit-team-stats-button');
                     var addButton = document.getElementById('add-player-button');
-                    editButton.style.display = 'none';
-                    addButton.style.display = 'none';
+                    editButton.style.display = 'block';
+                    addButton.style.display = 'block';
+                    document.getElementById('nav-add-player').className = "desktop-hidden";
+                    document.getElementById('team-stats-record-id').className = "nav-item"; 
+                }  
+            })
+    }
+}
+
+function handleAccessViewPlayer(){
+    var userId = localStorage.getItem("user");
+    if(userId != null){
+        var query = firebase.database().ref('Users/' + userId);
+        query.once("value").then(function(snapshot) {
+                var coach = snapshot.child("coach").val();
+                var manager = snapshot.child("manager").val();
+
+                if(coach == true || manager == true){
+                    var editButton = document.getElementById('edit-player-button');
+                    editButton.style.display = 'block';
+                    document.getElementById('view-player-record-id').className = "nav-item";
+                    document.getElementById('nav-edit-player').className = "desktop-hidden";
                 }
 
             })
@@ -175,6 +195,7 @@ function getJerseyNum(){
 
 /*Populates the template for viewing the stats of one player*/
 function handleReadForViewPlayer(){
+    handleAccessViewPlayer();
     var jNum = localStorage.getItem("jerseyNumber");
     window.addEventListener('DOMContentLoaded', function () {
         var query = firebase.database().ref('Players/JerseyNumber' +jNum);
@@ -236,8 +257,25 @@ function handleReadForViewPlayer(){
       });
 }
 
+function handleCoachAccess(){
+    var userId = localStorage.getItem("user");
+    if(userId != null){
+        var query = firebase.database().ref('Users/' + userId);
+        query.once("value").then(function(snapshot) {
+                var manager = snapshot.child("manager").val();
+
+                if(manager == true){
+                    document.getElementById('edit-delete-player').className = "btn btn-danger";
+                }
+
+            })
+    }
+    
+}
+
 /*Handles the functionality to edit player stats*/
 function handleEditPlayer(){
+    handleCoachAccess();
     var jNum = localStorage.getItem("jerseyNumber");
     var query = firebase.database().ref('Players/JerseyNumber' +jNum);
     query.once("value").then(function(snapshot) {
@@ -285,7 +323,8 @@ function handleEditPlayer(){
             }
             else{
                 document.getElementById("editCaptainCheck").checked = false;
-            }
+            }   
+        
         });
     
 }

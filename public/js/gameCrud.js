@@ -32,6 +32,24 @@ function handleAddGame(){
     
 }
 
+function handleAccessGameSchedule(){
+    var userId = localStorage.getItem("user");
+    if(userId != null){
+        var query = firebase.database().ref('Users/' + userId);
+        query.once("value").then(function(snapshot) {
+                var coach = snapshot.child("coach").val();
+                var manager = snapshot.child("manager").val();
+
+                if(coach == true || manager == true){
+                    document.getElementById('nav-edit-schedule').className = "desktop-hidden";
+                    document.getElementById('game-schedule-record-id').className = "nav-item";
+                    document.getElementById('add-new-game').style.display = "inline-block";   
+                }
+
+            })
+    }
+}
+
 function handleUpdate() {
   "use strict";
 
@@ -52,7 +70,7 @@ function handleUpdate() {
   }
 }
 
-function handleReadGame(){
+function handleReadGame(){       
   var query = firebase.database().ref("Games").orderByKey();
   query.once("value").then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) { // for loop here
@@ -63,7 +81,6 @@ function handleReadGame(){
       var datetime = childSnapshot.child("datetime").val();
       var status = childSnapshot.child("status").val();
       
-      
       var tmpl = document.getElementById('previousGame').content.cloneNode(true);
       tmpl.querySelector('.datetime').innerText = datetime;
       tmpl.querySelector('.gLocation').innerText = location;
@@ -73,6 +90,7 @@ function handleReadGame(){
       tmpl.querySelector('#editScheduleButton').value = datetime;
       document.querySelector('#viewPrevious').appendChild(tmpl); 
 
+  
       });      
   });
 
