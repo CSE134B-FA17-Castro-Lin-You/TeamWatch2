@@ -11,7 +11,6 @@ function handleSignUp() {
     lName = document.getElementById("inputLName").value.trim(),
     email = document.getElementById("inputEmail").value.trim(),
     password = document.getElementById("inputPassword").value,
-    code = document.getElementById("inputCode").value,
     tos = document.getElementById("tosAgree").checked;
 
   var coach = document.getElementById("sign-up-coach").checked;
