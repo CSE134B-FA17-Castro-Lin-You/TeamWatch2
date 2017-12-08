@@ -259,7 +259,14 @@ function handleReadMatchstats(){
       
 
   });
-  
+
+var query = firebase.database().ref('/Games/' + id);    
+query.once("value").then(function(snapshot){
+  var opponent = snapshot.child('them').val();
+  document.getElementById('my-team-vs-opponent').innerHTML = "My Team vs " + opponent; 
+});    
+     
+    
   themQuery.once("value").then(function(snapshot){
     var foulAgainst = snapshot.child("0-foul").val();
     var redAgainst = snapshot.child("1-red-card").val();
@@ -269,6 +276,7 @@ function handleReadMatchstats(){
     var cornerAgainst = snapshot.child("5-corner-kick").val();
     var goalKickAgainst = snapshot.child("6-goal-kick").val();
     var timeAgainst = snapshot.child("7-p-time").val();
+   
     document.getElementById('foulAgainst').innerHTML = foulAgainst;
     document.getElementById('redAgainst').innerHTML = redAgainst;
     document.getElementById('yellowCardAgainst').innerHTML = yellowAgainst;
