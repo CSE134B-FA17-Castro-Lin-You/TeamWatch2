@@ -17,7 +17,7 @@ function handleAddGame(){
   var status = document.getElementById("status").value.trim();
   
 
-  firebase.database().ref('/Games/GameId:' + id).set({
+  firebase.database().ref('/Games/' + datetime).set({
       gameType: gameType,
       them: them,
       location: location,
@@ -36,8 +36,9 @@ function handleUpdate() {
   "use strict";
 
   var inputs = document.querySelectorAll('.form-control');
-
-  if (parseInt(id, 10) > 0) {
+  var datetime = localStorage.getItem('datetime');
+  
+  if (datetime!= null) {
     firebase.database().ref('/Games/GameId:' + id).update({
       them: inputs[0].value,
       location: inputs[1].value,
@@ -67,12 +68,21 @@ function handleReadGame(){
       tmpl.querySelector('.gLocation').innerText = location;
       tmpl.querySelector('.matchUp').innerText = "My Team vs " + them;
       tmpl.querySelector('.gameType').innerHTML = status + " : " + gameType;
+      tmpl.querySelector('.viewMatchStatsButton').value = datetime;
+      tmpl.querySelector('.editScheduleButton').value = datetime;
       document.querySelector('#viewPrevious').appendChild(tmpl); 
 
       });      
   });
-
 }
+
+
+function saveGame(objButton){
+  var fired_button = objButton.value();
+  localStorage.setItem("datetime", fired_button);
+}
+
+
 
 document.addEventListener("DOMContentLoaded", function (event) {
   "use strict";

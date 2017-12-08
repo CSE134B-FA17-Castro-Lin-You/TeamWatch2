@@ -60,12 +60,12 @@
           <div class="form-group">
             <div class="radio">
               <label>
-                <input type="radio" name="status" id="status" value="Practice">Practice
+                <input type="radio" name="status" id="status1" value="Practice">Practice
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="status" id="status" value="Match">Match
+                <input type="radio" name="status" id="status2" value="Match">Match
               </label>
             </div> 
           </div>
@@ -93,12 +93,12 @@
             <label>Status</label>
             <div class="radio">
               <label>
-                <input type="radio" name="gameType" id="gameType" value="Home Game">Home
+                <input type="radio" name="gameType" id="gameType1" value="Home Game">Home
               </label>
             </div>
             <div class="radio">
               <label>
-                <input type="radio" name="gameType" id="gameType" value="Away Game">Away
+                <input type="radio" name="gameType" id="gameType2" value="Away Game">Away
               </label>
             </div> 
           </div>
@@ -113,9 +113,10 @@
         
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
     <script src="js/firebase.js"></script>
-    <script src="js/editGame.js"></script>
+    <script src="js/gameCrud.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/logOut.js"></script>
+    <script>handleEditGamePage()</script>
     </body>
 
     <!-- Evaluations: 3G Connection with disabled caching 

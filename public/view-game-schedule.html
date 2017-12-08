@@ -55,24 +55,14 @@
           <h1>Match Schedule</h1>
           <!-- mobile-hidden add/edit button -->
           <p><a class="btn btn-primary mobile-hidden" href="add-game.html">Add New Game</a></p>
-
-          
-          <!-- mock game example. Is not dynamically populated.-->
-          <article>
-            <h2 class=matchUp>My Team vs San Diego Community Team</h2>
-            <p class=datetime>2017-11-25T22:10</p>
-            <p class=gLocation>San Diego Petco Park</p>
-            <p class=gameType>Practice : Home Game</p>
-            <a class="btn btn-primary" href="matchstats.html?id=1">View Match Stats</a>
-            <a class="btn btn-primary" href="edit-game.html?id=1">Edit Schedule</a>
-            <hr>
-          </article>
           
           
           <div id="viewPrevious">
-    
-   
+          
           </div> 
+          
+          
+          
           <template id=previousGame>
             <article>
               <h2 class=matchUp>&nbsp;</h2>
@@ -81,11 +71,15 @@
               <p class=gameType>Home Game</p>
               <!-- <a class="btn btn-primary" href="matchstats.html">View Match Stats</a>
               <a class="btn btn-primary" href="edit-game.html">Edit Schedule</a> -->
-              <a class="btn btn-primary disabled">View Match Stats</a>
-              <a class="btn btn-primary disabled">Edit Schedule</a>
+              <a class="btn btn-primary" value="123" id="viewMatchStatsButton" onclick="saveGame(this)" href="matchstats.html">View Match Stats</a>
+              <a class="btn btn-primary" value="123" id="editScheduleButton" onclick="saveGame(this)" href="edit-game.html">Edit Schedule</a>
               <hr>
             </article>
           </template>    
+          
+          
+          
+          
         </div>
       </div>  
 
@@ -95,6 +89,7 @@
       <script src="js/navbar.js"></script>
       <script src="js/gameCrud.js"></script>
       <script src="js/logOut.js"></script>
+      <script>handleViewGameSchedule()</script>
     </body>
     <!-- Evaluations: 3G Connection with disabled caching 
     233KB Transffered

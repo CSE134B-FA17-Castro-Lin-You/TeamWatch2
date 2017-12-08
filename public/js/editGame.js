@@ -8,13 +8,15 @@
 var id;
 var teamName;
 
+// check
 function handleUpdate(){
   "use strict";
   
   var inputs = document.querySelectorAll('.form-control');
+  var datetime = localStorage.getItem("datetime");
   
-  if(parseInt(id, 10) > 0){
-    firebase.database().ref('/Games/GameId:' + id).update({
+  if(datetime != null){
+    firebase.database().ref('/Games/' + datetime).update({
       them: inputs[0].value,
       location: inputs[1].value,
       datetime: inputs[2].value
@@ -28,9 +30,10 @@ function handleUpdate(){
 
 function handleDelete() {
   "use strict";
+  var datetime = localStorage.getItem("datetime");
   if (confirm("Are you sure you want to delete this event?")) {
-    if (parseInt(id, 10) > 0) {
-      firebase.database().ref('/Games/GameId:' + id).set(null).then(function (res) {
+    if (datetime != null) {
+      firebase.database().ref('/Games/' + datetime).set(null).then(function (res) {
         window.location = "/view-game-schedule.html";
       });
     } else {
@@ -41,14 +44,21 @@ function handleDelete() {
 
 document.addEventListener("DOMContentLoaded", function (event) {
   "use strict";
+  
+  
+  
   firebase.database().ref('/Globals').once('value').then(function (snapshot) {
     teamName = snapshot.child('TeamName');
   });
   
-  var url = new URL(window.location.href);
-  id = url.searchParams.get("id");
-  if (parseInt(id, 10) > 0) {
-    firebase.database().ref('/Games/GameId:' + id).once('value').then(function (snapshot) {
+  //var url = new URL(window.location.href);
+  //id = url.searchParams.get("id");
+  
+  var datetime = localStorage.getItem("datetime");
+  alert('datetime is ' + datetime);
+  
+  if (datetime != null) {
+    firebase.database().ref('/Games/' + datetime).once('value').then(function (snapshot) {
       if (!snapshot.exists()) {
         alert('Not a recorded game');
         window.location = "/view-game-schedule.html";
@@ -68,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       
     });
   } else {
-    alert('Not a valid game');
+    alert('Not a valid game, ' + datetime);
     window.location = "/view-game-schedule.html";
   }
 });
