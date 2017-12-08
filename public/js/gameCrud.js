@@ -89,12 +89,11 @@ function handleReadGame(){
       tmpl.querySelector('#viewMatchStatsButton').value = datetime;
       tmpl.querySelector('#editScheduleButton').value = datetime;
       document.querySelector('#viewPrevious').appendChild(tmpl); 
-
-  
       });      
   });
 
 }
+
 
 
 // copied from editGame
@@ -202,16 +201,42 @@ function handleReadMatchstats(){
   usQuery.once("value").then(function(snapshot){
     var foulFor = snapshot.child("0-foul").val();
     var redFor = snapshot.child("1-red-card").val();
+    var yellowFor = snapshot.child("2-yellow-card").val();
+    var shotFor = snapshot.child("3-shot-on-goal").val();
+    var goalFor = snapshot.child("4-goal").val();
+    var cornerFor = snapshot.child("5-corner-kick").val();
+    var goalKickFor = snapshot.child("6-goal-kick").val();
+    var timeFor = snapshot.child("7-p-time").val();  
     document.getElementById('foulFor').innerHTML = foulFor;
     document.getElementById('redFor').innerHTML = redFor;
+    document.getElementById('yellowCardFor').innerHTML = yellowFor;
+    document.getElementById('shotOnGoalFor').innerHTML = shotFor;
+    document.getElementById('goalFor').innerHTML = goalFor;  
+    document.getElementById('cornerKicksFor').innerHTML = cornerFor;
+    document.getElementById('goalKicksFor').innerHTML = goalKickFor;
+    document.getElementById('possessionTimeFor').innerHTML = timeFor;
+      
+      
 
   });
   
   themQuery.once("value").then(function(snapshot){
     var foulAgainst = snapshot.child("0-foul").val();
     var redAgainst = snapshot.child("1-red-card").val();
+    var yellowAgainst = snapshot.child("2-yellow-card").val();
+    var shotAgainst = snapshot.child("3-shot-on-goal").val();
+    var goalAgainst = snapshot.child("4-goal").val();
+    var cornerAgainst = snapshot.child("5-corner-kick").val();
+    var goalKickAgainst = snapshot.child("6-goal-kick").val();
+    var timeAgainst = snapshot.child("7-p-time").val();
     document.getElementById('foulAgainst').innerHTML = foulAgainst;
     document.getElementById('redAgainst').innerHTML = redAgainst;
+    document.getElementById('yellowCardAgainst').innerHTML = yellowAgainst;
+    document.getElementById('shotOnGoalAgainst').innerHTML = shotAgainst;
+    document.getElementById('goalAgainst').innerHTML = goalAgainst;  
+    document.getElementById('cornerKicksAgainst').innerHTML = cornerAgainst;
+    document.getElementById('goalKicksAgainst').innerHTML = goalKickAgainst;
+    document.getElementById('possessionTimeAgainst').innerHTML = timeAgainst;
   });
   
   
