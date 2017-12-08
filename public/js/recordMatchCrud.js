@@ -12,34 +12,30 @@ function handleUpdate() {
   "use strict";
 
   var inputs = document.querySelectorAll('.form-control');
-
-  if (parseInt(id, 10) > 0) {
-    firebase.database().ref('/Games/GameId:' + id).update({
-      datetime: inputs[0].value,
-      location: inputs[1].value,
-      gameType: inputs[2].value,
-      status: inputs[3].value,
-      them: inputs[4].value,
+  var datetime = localStorage.getItem("datetime");
+  
+  if (datetime != null) {
+    firebase.database().ref('/Games/' + datetime).update({
       stats: {
         us: {
-          "0-foul": parseInt(inputs[5].value, 10),
-          "1-red-card": parseInt(inputs[7].value, 10),
-          "2-yellow-card": parseInt(inputs[9].value, 10),
-          "3-shot-on-goal": parseInt(inputs[11].value, 10),
-          "4-goal": parseInt(inputs[13].value, 10),
-          "5-corner-kick": parseInt(inputs[15].value, 10),
-          "6-goal-kick": parseInt(inputs[17].value, 10),
-          "7-p-time": inputs[19].value
+          "0-foul": inputs[1].value,
+          "1-red-card": inputs[3].value,
+          "2-yellow-card": inputs[5].value,
+          "3-shot-on-goal": inputs[7].value,
+          "4-goal": inputs[9].value,
+          "5-corner-kick": inputs[11].value,
+          "6-goal-kick": inputs[13].value,
+          "7-p-time": inputs[15].value
         },
         them: {
-          "0-foul": parseInt(inputs[6].value, 10),
-          "1-red-card": parseInt(inputs[8].value, 10),
-          "2-yellow-card": parseInt(inputs[10].value, 10),
-          "3-shot-on-goal": parseInt(inputs[12].value, 10),
-          "4-goal": parseInt(inputs[14].value, 10),
-          "5-corner-kick": parseInt(inputs[16].value, 10),
-          "6-goal-kick": parseInt(inputs[18].value, 10),
-          "7-p-time": inputs[20].value
+          "0-foul": inputs[2].value,
+          "1-red-card": inputs[4].value,
+          "2-yellow-card": inputs[6].value,
+          "3-shot-on-goal": inputs[8].value,
+          "4-goal": inputs[10].value,
+          "5-corner-kick": inputs[12].value,
+          "6-goal-kick": inputs[14].value,
+          "7-p-time": inputs[16].value
         }
       }
     }).then(function (res) {
@@ -51,19 +47,19 @@ function handleUpdate() {
 }
 
 function handleAccessRecordMatch(){
-     var userId = localStorage.getItem("user");
-    if(userId != null){
-        var query = firebase.database().ref('Users/' + userId);
-        query.once("value").then(function(snapshot) {
-                var coach = snapshot.child("coach").val();
-                var manager = snapshot.child("manager").val();
+  var userId = localStorage.getItem("user");
+  if(userId != null){
+    var query = firebase.database().ref('Users/' + userId);
+    query.once("value").then(function(snapshot) {
+      var coach = snapshot.child("coach").val();
+      var manager = snapshot.child("manager").val();
 
-                if(coach == true || manager == true){
-                    document.getElementById('record-match-id').className = "nav-item active";
-                }
+      if(coach == true || manager == true){
+        document.getElementById('record-match-id').className = "nav-item active";
+      }
 
-            })
-    }
+    })
+  }
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -78,11 +74,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+// populate dropdown
 function handleChooseDate(){
-  
   var dropdown = document.getElementById("datetimeDropdown");
   var query = firebase.database().ref("Games").orderByKey();
 
+  var option2 = document.createElement("option");
+  option2.text = "Select a date & time";
+  dropdown.add(option2);
+  
   query.once("value").then(function(snapshot){
 
   snapshot.forEach(function(childSnapshot){ // looping
@@ -95,37 +95,29 @@ function handleChooseDate(){
     dropdown.add(option);
     })
   })
+}
+
+
+
+
+function changeField(){
+  var dropdownText = 0;
+  var dropdown = document.getElementById("datetimeDropdown");
+  
+  for(var i = 0, len = dropdown.options.length; i < len; i++){
+    var opt = dropdown.options[i];
+    if (opt.selected === true){
+      dropdownText = opt.text
+    }
+  }
   
   
+  var opponentName = firebase.database().ref("Games/" + dropdownText);
+  opponentName.once("value").then(function(snapshot){
+    var opponentNameVal = snapshot.child("them").val();
+    var locationNameVal = snapshot.child("location").val();
+    document.getElementById("opponentName").innerHTML = opponentNameVal;  
+    document.getElementById("locationName").innerHTML = locationNameVal;
+  })
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  /*
-  
-  alert("calling choose date to populate dropdown");
-  var query = firebase.database().ref("Games").orderByKey();
-  
-  query.once("value").then(function(snapshot){
-    
-    snapshot.forEach(function(childSnapshot){
-      
-      var datetime = childSnapshot.child("datetime").val();
-      alert("populating " + datetime);
-      
-      var tmpl = document.getElementById('datetimeTemplate').content.cloneNode(true);
-      tmpl.querySelector('.datetimeOption').innerText = datetime;
-      document.querySelector('.datetimeList').appendChild(tmpl); // div id
-    })
-  })*/
 }

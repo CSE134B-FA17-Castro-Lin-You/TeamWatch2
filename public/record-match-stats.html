@@ -56,8 +56,8 @@
       </h1>
       
       <form class="jumbotron bg-gray" action="view-game-schedule.html">
-        <div class="form-group row">
-          <!-- <label for="datetime-input" class="col-md-3 col-form-label">Time</label>
+        <!-- <div class="form-group row">
+          <label for="datetime-input" class="col-md-3 col-form-label">Time</label>
           <div class="col-md-6">
             <input class="form-control" type="datetime-local" value="1970-12-31T00:00:00" id="datetime-input">
           </div>
@@ -94,17 +94,32 @@
             <input class="form-control" type="text" placeholder="e.g. UCSD Soccer Team" id="them-input">
           </div>
         </div> -->
-        
-        <div class="form-group row">
-          <label for="status-input" class="col-md-3 col-form-label">Date &amp; Time</label>
-          <div class="col-md-6">
-            <select class="form-control" id="datetimeDropdown">
-              
-                            
-            </select>
+        <strong>
+          <div class="form-group row">
+            <label for="status-input" class="col-md-3 col-form-label">Date &amp; Time</label>
+            <div class="col-md-6">
+              <select class="form-control" id="datetimeDropdown" onClick="changeField()">
+              </select>
+            </div>
           </div>
-        </div>
+        </strong>
           
+        <strong>
+          <div class="form-group row">
+            <label for="status-input" class="col-md-3 col-form-label">Opponent</label>
+            <div class="col-md-6" id="opponentName">
+            </div>
+          </div>
+        </strong>
+        
+        <strong>
+          <div class="form-group row">
+            <label for="status-input" class="col-md-3 col-form-label">Location</label>
+            <div class="col-md-6" id="locationName">
+            </div>
+          </div>
+        </strong>
+        
         <table class="table table-striped">
           <thead>
             <tr>
@@ -167,6 +182,7 @@
     <script src="js/logOut.js"></script> 
     <script>handleAccessRecordMatch()</script>  
     <script>handleChooseDate()</script>
+    <script>changeField()</script>
   </body>
     
     <!-- Evaluations: 3G Connection with disabled caching 
