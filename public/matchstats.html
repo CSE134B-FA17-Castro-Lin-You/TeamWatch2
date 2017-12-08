@@ -27,7 +27,7 @@
       </button>
       <a class="navbar-brand" href="view-game-schedule.html"><img class="mobile-hidden" src="images/logo.png" alt="teamwatch logo"><img class="desktop-hidden" src="images/logo-small.png" alt="teamwatch logo"></a>
       <!-- desktop-hidden navbar button -->
-      <a href="edit-match-stats.html?id=1" class="btn btn-primary desktop-hidden" role="button"><span class="fa fa-pencil-square-o fa-lg light"></span></a>
+      <a id="nav-edit-link" href="edit-match-stats.html?id=1" class="btn btn-primary makeInvisible" role="button"><span class="fa fa-pencil-square-o fa-lg light"></span></a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
@@ -40,7 +40,7 @@
               <a class="dropdown-item" href="view-game-schedule.html">All Matches</a>
             </div>
           </li>
-          <li class="nav-item">
+          <li id="match-stats-record-id" class="dontDisplay">
             <a class="nav-link" href="record-match-stats.html">Record Match Stats</a>
           </li>
           <li class="nav-item desktop-hidden">
@@ -74,7 +74,7 @@
       
       <h2>Match Stats</h2>
       <!-- mobile-hidden add/edit button -->
-      <p><a class="btn btn-primary mobile-hidden" href="edit-match-stats.html?id=1">Edit Match Stats</a></p>
+      <p class="mobile-hidden light" ><a style="display:none;" id="edit-match-stats-button" class="btn btn-primary mobile-hidden" href="edit-match-stats.html?id=1">Edit Match Stats</a></p>
       
       <table class="table table-striped">
         <thead>
@@ -133,7 +133,26 @@
     <script src="js/navbar.js"></script>
       
   </body>
-    
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>    
+  <script src="js/firebase.js"></script>
+  <script> 
+      var userId = localStorage.getItem("user");
+         if(userId != null){
+            var query = firebase.database().ref('Users/' + userId);
+            query.once("value").then(function(snapshot) {
+                    var coach = snapshot.child("coach").val();
+                    var manager = snapshot.child("manager").val();
+
+                    if(coach == true || manager == true){
+                        var editButton = document.getElementById('edit-match-stats-button');
+                        editButton.style.display = 'block';
+                        document.getElementById('nav-edit-link').className = "desktop-hidden";
+                        document.getElementById('match-stats-record-id').className = "nav-item";
+                    }
+
+                })
+        }
+  </script>    
    <!-- Evaluations: 3G Connection with disabled caching 
     166KB Transffered
     DOMContentLoaded: 1.37s

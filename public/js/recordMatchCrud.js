@@ -50,6 +50,22 @@ function handleUpdate() {
   }
 }
 
+function handleAccessRecordMatch(){
+     var userId = localStorage.getItem("user");
+    if(userId != null){
+        var query = firebase.database().ref('Users/' + userId);
+        query.once("value").then(function(snapshot) {
+                var coach = snapshot.child("coach").val();
+                var manager = snapshot.child("manager").val();
+
+                if(coach == true || manager == true){
+                    document.getElementById('record-match-id').className = "nav-item active";
+                }
+
+            })
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
   "use strict";
   firebase.database().ref('/Globals').once('value').then(function (snapshot) {

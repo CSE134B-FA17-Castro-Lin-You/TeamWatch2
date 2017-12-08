@@ -38,7 +38,7 @@
               <a class="dropdown-item" href="view-game-schedule.html">All Matches</a>
             </div>
           </li>
-          <li class="nav-item active">
+          <li id="record-match-id" class="dontDisplay">
             <a class="nav-link" href="record-match-stats.html">Record Match Stats <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item desktop-hidden">
@@ -153,7 +153,8 @@
     <script src="js/firebase.js"></script>
     <script src="js/recordMatchCrud.js"></script>
     <script src="js/navbar.js"></script>
-    <script src="js/logOut.js"></script>  
+    <script src="js/logOut.js"></script> 
+    <script>handleAccessRecordMatch()</script>  
   </body>
     
     <!-- Evaluations: 3G Connection with disabled caching 

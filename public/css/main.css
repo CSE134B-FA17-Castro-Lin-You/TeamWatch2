@@ -39,6 +39,14 @@ div#scheduleContainer{
     flex-direction: column;
 }
 
+.dontDisplay{
+    display: none;
+}
+
+.makeInvisible{
+    visibility: hidden;
+}
+
 p.eventField{
     margin: auto;
 }
@@ -59,6 +67,9 @@ hr.scheduleHr{
     margin:0.5em;
 }
 
+.always-show{
+    display: inline-block;
+}
 h3.edit-match-title{
     width: 100%;
     text-align: center;
@@ -172,6 +183,20 @@ span.light {
     hr.scheduleHr { 
         width: 30% !important;
     }
+    
+    .makeInvisible{
+        visibility: hidden;
+    }
+    
+    .always-show{
+        display: inline-block;
+    }
+    
+    .dontDisplay{
+        display: none;
+    }
+    
+    
     /* End Bryle's section for Large Screens */
 
     /* Start Han's section for Large Screens */

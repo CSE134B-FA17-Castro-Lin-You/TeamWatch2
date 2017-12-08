@@ -21,7 +21,7 @@
       </button>
       <a class="navbar-brand" href="view-game-schedule.html"><img class="mobile-hidden" src="images/logo.png" alt="teamwatch logo"><img class="desktop-hidden" src="images/logo-small.png" alt="teamwatch logo"></a>
       <!-- desktop-hidden navbar button -->
-      <a href="edit-player.html" class="btn btn-primary desktop-hidden" role="button"><span class="fa fa-pencil fa-lg light"></span></a>
+      <a id="nav-edit-player" href="edit-player.html" class="btn btn-primary makeInvisible" role="button"><span class="fa fa-pencil fa-lg light"></span></a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -34,7 +34,7 @@
               <a class="dropdown-item" href="view-game-schedule.html">All Matches</a>
             </div>
           </li>
-          <li class="nav-item">
+          <li id="view-player-record-id" class="dontDisplay">
             <a class="nav-link" href="record-match-stats.html">Record Match Stats</a>
           </li>
           <li class="nav-item desktop-hidden">
@@ -46,7 +46,7 @@
     </nav>
     <main role="main" class="container">
       <!-- mobile-hidden add/edit button -->
-      <p class="mobile-hidden light"><a href="edit-player.html" onclick="getJerseyNum()" class="btn btn-primary" role="button" type="button">Edit Player</a></p>
+      <p class="mobile-hidden light"><a style="display: none;" id="edit-player-button" href="edit-player.html" onclick="getJerseyNum()" class="btn btn-primary" role="button" type="button">Edit Player</a></p>
       <div id="viewPlayerView"></div>
       <template id=viewPlayerTemplate>
         <!-- Player One -->
