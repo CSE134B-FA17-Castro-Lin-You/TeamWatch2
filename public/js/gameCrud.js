@@ -50,6 +50,50 @@ function handleAccessGameSchedule(){
     }
 }
 
+function handleEditMatchStats(){
+  var id = localStorage.getItem("datetime");
+  if (id != null) {
+    firebase.database().ref('/Games/' + id).once('value').then(function (snapshot) {
+      if (!snapshot.exists()) {
+        alert('Not a recorded game');
+        window.location = "/view-game-schedule.html";
+      }
+
+      var datetime = snapshot.child('datetime'),
+        status = snapshot.child('status'),
+        location = snapshot.child('location'),
+        type = snapshot.child('gameType'),
+        themName = snapshot.child('them'),
+        us = snapshot.child('stats').child('us'),
+        them = snapshot.child('stats').child('them'),
+        usCtr = 5,
+        themCtr = 6,
+        inputs = document.querySelectorAll('.form-control');
+
+      inputs[0].value = datetime.val();
+      inputs[1].value = location.val();
+      inputs[2].value = type.val();
+      inputs[3].value = status.val();
+      inputs[4].value = themName.val();
+      
+      us.forEach(function (childSnapshot) {
+        inputs[usCtr].value = childSnapshot.val();
+        usCtr += 2;
+      });
+      
+      them.forEach(function (childSnapshot) {
+        inputs[themCtr].value = childSnapshot.val();
+        themCtr += 2;
+      });
+      
+      document.getElementById('them').innerHTML = themName.val();
+      document.getElementById('us').innerHTML = teamName.val();
+    });
+  }   
+           
+}
+
+
 function handleUpdate() {
   "use strict";
 
@@ -165,7 +209,6 @@ function handleEditGamePage(){
   //id = url.searchParams.get("id");
   
   var datetime = localStorage.getItem("datetime");
-  alert("date time on edit game is " + datetime);
     
   if (datetime != null) {
     firebase.database().ref('/Games/' + datetime).once('value').then(function (snapshot) {

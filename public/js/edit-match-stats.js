@@ -10,11 +10,12 @@ var teamName;
 
 function handleUpdate() {
   "use strict";
-
+    
+  var id = localStorage.getItem("datetime");    
   var inputs = document.querySelectorAll('.form-control');
 
-  if (parseInt(id, 10) > 0) {
-    firebase.database().ref('/Games/GameId:' + id).update({
+  if (id != null) {
+    firebase.database().ref('/Games/' + id).update({
       datetime: inputs[0].value,
       location: inputs[1].value,
       gameType: inputs[2].value,
@@ -54,7 +55,7 @@ function handleDelete() {
   "use strict";
   if (confirm("Are you sure you want to delete these match stats?")) {
     if (parseInt(id, 10) > 0) {
-      firebase.database().ref('/Games/GameId:' + id).set(null).then(function (res) {
+      firebase.database().ref('/Games/' + id).set(null).then(function (res) {
         window.location = "/teamstats.html";
       });
     } else {
@@ -71,8 +72,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
   
   var url = new URL(window.location.href);
   id = url.searchParams.get("id");
-  if (parseInt(id, 10) > 0) {
-    firebase.database().ref('/Games/GameId:' + id).once('value').then(function (snapshot) {
+  var id = localStorage.getItem("datetime");
+  if (id != null) {
+    firebase.database().ref('/Games/' + id).once('value').then(function (snapshot) {
       if (!snapshot.exists()) {
         alert('Not a recorded game');
         window.location = "/view-game-schedule.html";
@@ -108,10 +110,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
       document.getElementById('them').innerHTML = themName.val();
       document.getElementById('us').innerHTML = teamName.val();
     });
-  } else {
-    alert('Not a valid game');
-    window.location = "/view-game-schedule.html";
-  }
+  }   
+           
 });
 
 /*ESLint Problems: None */
