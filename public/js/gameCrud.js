@@ -33,21 +33,21 @@ function handleAddGame(){
 }
 
 function handleAccessGameSchedule(){
-    var userId = localStorage.getItem("user");
-    if(userId != null){
-        var query = firebase.database().ref('Users/' + userId);
-        query.once("value").then(function(snapshot) {
-                var coach = snapshot.child("coach").val();
-                var manager = snapshot.child("manager").val();
+  var userId = localStorage.getItem("user");
+  if(userId != null){
+    var query = firebase.database().ref('Users/' + userId);
+    query.once("value").then(function(snapshot) {
+      var coach = snapshot.child("coach").val();
+      var manager = snapshot.child("manager").val();
 
-                if(coach == true || manager == true){
-                    document.getElementById('nav-edit-schedule').className = "desktop-hidden";
-                    document.getElementById('game-schedule-record-id').className = "nav-item";
-                    document.getElementById('add-new-game').style.display = "inline-block";   
-                }
+      if(coach == true || manager == true){
+        document.getElementById('nav-edit-schedule').className = "desktop-hidden";
+        document.getElementById('game-schedule-record-id').className = "nav-item";
+        document.getElementById('add-new-game').style.display = "inline-block";   
+      }
 
-            })
-    }
+    })
+  }
 }
 
 function handleUpdate() {
@@ -73,21 +73,40 @@ function handleUpdate() {
 function handleReadGame(){       
   var id = localStorage.getItem("user");
   if(id != null){
-        var query = firebase.database().ref('Users/' + id);
-        query.once("value").then(function(snapshot) {
-                var coach = snapshot.child("coach").val();
-                var manager = snapshot.child("manager").val();
+    var query = firebase.database().ref('Users/' + id);
+    query.once("value").then(function(snapshot) {
+      var coach = snapshot.child("coach").val();
+      var manager = snapshot.child("manager").val();
+      
+        if(coach == true || manager == true){
+          handleReadAllowEdits();  
+        }
+        else{
+          handleReadNoEdits();
+        }
 
-                if(coach == true || manager == true){
-                    handleReadAllowEdits();  
-                }
-                else{
-                    handleReadNoEdits();
-                }
+    })
+  }          
+}
 
-            })
-    }          
 
+function handleReadUpcomingGame(date){       
+  var id = localStorage.getItem("user");
+  if(id != null){
+    var query = firebase.database().ref('Users/' + id);
+    query.once("value").then(function(snapshot) {
+      var coach = snapshot.child("coach").val();
+      var manager = snapshot.child("manager").val();
+      
+        if(coach == true || manager == true){
+          handleReadUpcomingAllowEdits(date);  
+        }
+        else{
+          handleReadUpcomingNoEdits(date);
+        }
+
+    })
+  }          
 }
 
 
@@ -136,6 +155,97 @@ function handleReadNoEdits(){
       });      
   });
 }
+
+function handleReadUpcomingAllowEdits(date){
+  
+  var query = firebase.database().ref("Games").orderByKey();
+  query.once("value").then(function(snapshot) {
+     snapshot.forEach(function(childSnapshot) { // for loop here
+
+      var gameType = childSnapshot.child("gameType").val();
+      var them = childSnapshot.child("them").val();
+      var location = childSnapshot.child("location").val();
+      var datetime = childSnapshot.child("datetime").val();
+      var status = childSnapshot.child("status").val();
+
+      var display = false;
+      
+       
+      // comparing dates
+      for(var i = 0; i < 16; i++){
+        // date is less than gamedate
+        if(date.charCodeAt(i) < datetime.charCodeAt(i)){
+          // it's a future game. print.
+          display = true;
+          break;
+        }
+        
+        // date is greater than
+        if(date.charCodeAt(i) > datetime.charCodeAt(i)){
+          // it's a past game. don't print
+          break;
+        }
+      }
+      
+      if(display == true){
+        var tmpl = document.getElementById('previousGame').content.cloneNode(true);
+        tmpl.querySelector('.datetime').innerText = datetime;
+        tmpl.querySelector('.gLocation').innerText = location;
+        tmpl.querySelector('.matchUp').innerText = "My Team vs " + them;
+        tmpl.querySelector('.gameType').innerHTML = status + " : " + gameType;
+        tmpl.querySelector('#viewMatchStatsButton').value = datetime;
+        tmpl.querySelector('#editScheduleButton').value = datetime;
+        document.querySelector('#viewPrevious').appendChild(tmpl); 
+       }
+       
+    });      
+  });
+}
+
+function handleReadUpcomingNoEdits(date){
+ var query = firebase.database().ref("Games").orderByKey();
+  query.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) { // for loop here
+
+      var gameType = childSnapshot.child("gameType").val();
+      var them = childSnapshot.child("them").val();
+      var location = childSnapshot.child("location").val();
+      var datetime = childSnapshot.child("datetime").val();
+      var status = childSnapshot.child("status").val();
+      
+      var display = false;
+      
+       
+      // comparing dates
+      for(var i = 0; i < 16; i++){
+        // date is less than gamedate
+        if(date.charCodeAt(i) < datetime.charCodeAt(i)){
+          // it's a future game. print.
+          display = true;
+          break;
+        }
+        
+        // date is greater than
+        if(date.charCodeAt(i) > datetime.charCodeAt(i)){
+          // it's a past game. don't print
+          break;
+        }
+      }
+      
+      if(display == true){
+        var tmpl = document.getElementById('previousGame').content.cloneNode(true);
+        tmpl.querySelector('.datetime').innerText = datetime;
+        tmpl.querySelector('.gLocation').innerText = location;
+        tmpl.querySelector('.matchUp').innerText = "My Team vs " + them;
+        tmpl.querySelector('.gameType').innerHTML = status + " : " + gameType;
+        tmpl.querySelector('#viewMatchStatsButton').value = datetime;
+        tmpl.querySelector('#editScheduleButton').style.display = 'none';
+        document.querySelector('#viewPrevious').appendChild(tmpl); 
+      }
+    });      
+  });
+}
+
 // copied from editGame
 function handleDelete() {
   "use strict";
@@ -182,6 +292,19 @@ function handleAddGamePage(){
       id = snapshot.child('GameCounter').val();
       firebase.database().ref('/Globals/GameCounter').set(parseInt(id, 10) + 1);
       handleReadGame();
+    });
+  });
+}
+
+
+function handleUpcoming(date){
+  document.addEventListener("DOMContentLoaded", function (event) {
+    "use strict";
+    firebase.database().ref('/Globals').once('value').then(function (snapshot) {
+      teamName = snapshot.child('TeamName');
+      id = snapshot.child('GameCounter').val();
+      firebase.database().ref('/Globals/GameCounter').set(parseInt(id, 10) + 1);
+      handleReadUpcomingGame(date);
     });
   });
 }
@@ -286,17 +409,18 @@ function handleReadMatchstats(){
     document.getElementById('redAgainst').innerHTML = redAgainst;
     document.getElementById('yellowCardAgainst').innerHTML = yellowAgainst;
     document.getElementById('shotOnGoalAgainst').innerHTML = shotAgainst;
-    document.getElementById('goalAgainst').innerHTML = goalAgainst;  
+    document.getElementById('goalAgainst').innerHTML = goalAgainst; 
     document.getElementById('cornerKicksAgainst').innerHTML = cornerAgainst;
     document.getElementById('goalKicksAgainst').innerHTML = goalKickAgainst;
     document.getElementById('possessionTimeAgainst').innerHTML = timeAgainst;
   });
-  
-
     
 }
 
 
 
-
-
+function handleUpcomingMatch(){
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+  ("0" + today.getDate()).slice(-2)+'T'+today.getHours()+":"+today.getMinutes();
+  handleUpcoming(date);
+}
