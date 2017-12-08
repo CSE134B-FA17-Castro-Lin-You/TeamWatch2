@@ -70,8 +70,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     teamName = snapshot.child('TeamName');
   });
   
-  var url = new URL(window.location.href);
-  id = url.searchParams.get("id");
   var id = localStorage.getItem("datetime");
   if (id != null) {
     firebase.database().ref('/Games/' + id).once('value').then(function (snapshot) {

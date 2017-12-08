@@ -50,50 +50,6 @@ function handleAccessGameSchedule(){
     }
 }
 
-function handleEditMatchStats(){
-  var id = localStorage.getItem("datetime");
-  if (id != null) {
-    firebase.database().ref('/Games/' + id).once('value').then(function (snapshot) {
-      if (!snapshot.exists()) {
-        alert('Not a recorded game');
-        window.location = "/view-game-schedule.html";
-      }
-
-      var datetime = snapshot.child('datetime'),
-        status = snapshot.child('status'),
-        location = snapshot.child('location'),
-        type = snapshot.child('gameType'),
-        themName = snapshot.child('them'),
-        us = snapshot.child('stats').child('us'),
-        them = snapshot.child('stats').child('them'),
-        usCtr = 5,
-        themCtr = 6,
-        inputs = document.querySelectorAll('.form-control');
-
-      inputs[0].value = datetime.val();
-      inputs[1].value = location.val();
-      inputs[2].value = type.val();
-      inputs[3].value = status.val();
-      inputs[4].value = themName.val();
-      
-      us.forEach(function (childSnapshot) {
-        inputs[usCtr].value = childSnapshot.val();
-        usCtr += 2;
-      });
-      
-      them.forEach(function (childSnapshot) {
-        inputs[themCtr].value = childSnapshot.val();
-        themCtr += 2;
-      });
-      
-      document.getElementById('them').innerHTML = themName.val();
-      document.getElementById('us').innerHTML = teamName.val();
-    });
-  }   
-           
-}
-
-
 function handleUpdate() {
   "use strict";
 
@@ -133,12 +89,11 @@ function handleReadGame(){
       tmpl.querySelector('#viewMatchStatsButton').value = datetime;
       tmpl.querySelector('#editScheduleButton').value = datetime;
       document.querySelector('#viewPrevious').appendChild(tmpl); 
-
-  
       });      
   });
 
 }
+
 
 
 // copied from editGame
@@ -247,16 +202,42 @@ function handleReadMatchstats(){
   usQuery.once("value").then(function(snapshot){
     var foulFor = snapshot.child("0-foul").val();
     var redFor = snapshot.child("1-red-card").val();
+    var yellowFor = snapshot.child("2-yellow-card").val();
+    var shotFor = snapshot.child("3-shot-on-goal").val();
+    var goalFor = snapshot.child("4-goal").val();
+    var cornerFor = snapshot.child("5-corner-kick").val();
+    var goalKickFor = snapshot.child("6-goal-kick").val();
+    var timeFor = snapshot.child("7-p-time").val();  
     document.getElementById('foulFor').innerHTML = foulFor;
     document.getElementById('redFor').innerHTML = redFor;
+    document.getElementById('yellowCardFor').innerHTML = yellowFor;
+    document.getElementById('shotOnGoalFor').innerHTML = shotFor;
+    document.getElementById('goalFor').innerHTML = goalFor;  
+    document.getElementById('cornerKicksFor').innerHTML = cornerFor;
+    document.getElementById('goalKicksFor').innerHTML = goalKickFor;
+    document.getElementById('possessionTimeFor').innerHTML = timeFor;
+      
+      
 
   });
   
   themQuery.once("value").then(function(snapshot){
     var foulAgainst = snapshot.child("0-foul").val();
     var redAgainst = snapshot.child("1-red-card").val();
+    var yellowAgainst = snapshot.child("2-yellow-card").val();
+    var shotAgainst = snapshot.child("3-shot-on-goal").val();
+    var goalAgainst = snapshot.child("4-goal").val();
+    var cornerAgainst = snapshot.child("5-corner-kick").val();
+    var goalKickAgainst = snapshot.child("6-goal-kick").val();
+    var timeAgainst = snapshot.child("7-p-time").val();
     document.getElementById('foulAgainst').innerHTML = foulAgainst;
     document.getElementById('redAgainst').innerHTML = redAgainst;
+    document.getElementById('yellowCardAgainst').innerHTML = yellowAgainst;
+    document.getElementById('shotOnGoalAgainst').innerHTML = shotAgainst;
+    document.getElementById('goalAgainst').innerHTML = goalAgainst;  
+    document.getElementById('cornerKicksAgainst').innerHTML = cornerAgainst;
+    document.getElementById('goalKicksAgainst').innerHTML = goalKickAgainst;
+    document.getElementById('possessionTimeAgainst').innerHTML = timeAgainst;
   });
   
   
