@@ -71,8 +71,29 @@ function handleUpdate() {
 }
 
 function handleReadGame(){       
-  var query = firebase.database().ref("Games").orderByKey();
-  query.once("value").then(function(snapshot) {
+  var id = localStorage.getItem("user");
+  if(id != null){
+        var query = firebase.database().ref('Users/' + id);
+        query.once("value").then(function(snapshot) {
+                var coach = snapshot.child("coach").val();
+                var manager = snapshot.child("manager").val();
+
+                if(coach == true || manager == true){
+                    handleReadAllowEdits();  
+                }
+                else{
+                    handleReadNoEdits();
+                }
+
+            })
+    }          
+
+}
+
+
+function handleReadAllowEdits(){
+     var query = firebase.database().ref("Games").orderByKey();
+     query.once("value").then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) { // for loop here
 
       var gameType = childSnapshot.child("gameType").val();
@@ -91,11 +112,30 @@ function handleReadGame(){
       document.querySelector('#viewPrevious').appendChild(tmpl); 
       });      
   });
-
 }
 
+function handleReadNoEdits(){
+ var query = firebase.database().ref("Games").orderByKey();
+  query.once("value").then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) { // for loop here
 
-
+      var gameType = childSnapshot.child("gameType").val();
+      var them = childSnapshot.child("them").val();
+      var location = childSnapshot.child("location").val();
+      var datetime = childSnapshot.child("datetime").val();
+      var status = childSnapshot.child("status").val();
+      
+      var tmpl = document.getElementById('previousGame').content.cloneNode(true);
+      tmpl.querySelector('.datetime').innerText = datetime;
+      tmpl.querySelector('.gLocation').innerText = location;
+      tmpl.querySelector('.matchUp').innerText = "My Team vs " + them;
+      tmpl.querySelector('.gameType').innerHTML = status + " : " + gameType;
+      tmpl.querySelector('#viewMatchStatsButton').value = datetime;
+      tmpl.querySelector('#editScheduleButton').style.display = 'none';
+      document.querySelector('#viewPrevious').appendChild(tmpl); 
+      });      
+  });
+}
 // copied from editGame
 function handleDelete() {
   "use strict";
