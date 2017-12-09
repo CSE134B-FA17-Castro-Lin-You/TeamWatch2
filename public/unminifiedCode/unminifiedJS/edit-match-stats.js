@@ -8,6 +8,7 @@
 var id;
 var teamName;
 
+// Updates firebase database of the stats of a match from a game schedule entry
 function handleUpdate() {
   "use strict";
     
@@ -51,10 +52,12 @@ function handleUpdate() {
   }
 }
 
+/*Deletes recorded stats for a game*/
 function handleDelete() {
   "use strict";
+  id = localStorage.getItem("datetime");     
   if (confirm("Are you sure you want to delete these match stats?")) {
-    if (parseInt(id, 10) > 0) {
+    if (id != null) {
       firebase.database().ref('/Games/' + id).set(null).then(function (res) {
         window.location = "/teamstats.html";
       });
@@ -64,6 +67,7 @@ function handleDelete() {
   }
 }
 
+/* Handles the popultion of the edit match stats table*/
 document.addEventListener("DOMContentLoaded", function (event) {
   "use strict";
   firebase.database().ref('/Globals').once('value').then(function (snapshot) {

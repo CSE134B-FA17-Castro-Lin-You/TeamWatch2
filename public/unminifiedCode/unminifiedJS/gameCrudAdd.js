@@ -5,10 +5,11 @@
 /*eslint no-undef: "error"*/
 /*eslint no-unused-vars: ["error", { "vars": "local", "args": "none" }]*/
 
-var id;
-var teamName;
+var id;   //Used for storing date and time of game
+var teamName; //Used to store the team name
 
 
+/*Handles functionality to add a game schedule entry*/
 function handleAddGame(){
   var gameType = document.getElementById("gameType").value.trim();
   var them = document.getElementById("addOpponentTeam").value.trim();
@@ -32,6 +33,7 @@ function handleAddGame(){
     
 }
 
+/*Updates firesbase with game schedule entry data*/
 function handleUpdate() {
   "use strict";
 
@@ -51,6 +53,7 @@ function handleUpdate() {
   }
 }
 
+/*Populates the page with all game schedule entries*/
 function handleReadGame(){
   var query = firebase.database().ref("Games").orderByKey();
   query.once("value").then(function(snapshot) {
@@ -77,13 +80,14 @@ function handleReadGame(){
 }
 
 
+/*Save the date and time of a game schedule entry onto local storage for later use*/
 function saveGame(objButton){
   var fired_button = objButton.value();
   localStorage.setItem("datetime", fired_button);
 }
 
 
-
+/*Increment the amount of games the team is going to be playing*/
 document.addEventListener("DOMContentLoaded", function (event) {
   "use strict";
   firebase.database().ref('/Globals').once('value').then(function (snapshot) {

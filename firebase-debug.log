@@ -1,0 +1,70 @@
+[debug] [2017-12-09T00:31:58.277Z] ----------------------------------------------------------------------
+[debug] [2017-12-09T00:31:58.282Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\bryle\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2017-12-09T00:31:58.283Z] CLI Version:   3.15.3
+[debug] [2017-12-09T00:31:58.283Z] Platform:      win32
+[debug] [2017-12-09T00:31:58.283Z] Node Version:  v6.9.4
+[debug] [2017-12-09T00:31:58.284Z] Time:          Fri Dec 08 2017 16:31:58 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:31:58.284Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-09T00:31:58.294Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-09T00:31:58.294Z] > authorizing via signed-in user
+[debug] [2017-12-09T00:31:58.299Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-12-09T00:31:58.299Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/aeRaCLhggOVzx1LuHVdKsFp_JmC7pvrGQgTwi6K46u8',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Dec 08 2017 16:31:58 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:31:58.515Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-09T00:31:58.555Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/teamwatch-4f856  
+ Fri Dec 08 2017 16:31:58 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:31:59.094Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-09T00:31:59.094Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/teamwatch-4f856/tokens  
+ Fri Dec 08 2017 16:31:59 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:32:00.063Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'teamwatch-4f856'...
+[info] 
+[info] i  deploying database, storage, hosting
+[info] i  database: checking rules syntax...
+[debug] [2017-12-09T00:32:00.676Z] >>> HTTP REQUEST PUT https://teamwatch-4f856.firebaseio.com/.settings/rules.json?dryRun=true {
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+ 
+ Fri Dec 08 2017 16:32:00 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:32:01.354Z] <<< HTTP RESPONSE 200
+[info] +  database: rules syntax for database teamwatch-4f856 is valid
+[debug] [2017-12-09T00:32:01.359Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/teamwatch-4f856  
+ Fri Dec 08 2017 16:32:01 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:32:02.090Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2017-12-09T00:32:02.110Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/teamwatch-4f856:test { source: { files: [ [Object] ] } } 
+ Fri Dec 08 2017 16:32:02 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:32:02.556Z] <<< HTTP RESPONSE 200
+[info] +  storage: rules file storage.rules compiled successfully
+[info] i  storage: uploading rules storage.rules...
+[debug] [2017-12-09T00:32:02.561Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/teamwatch-4f856/rulesets { source: { files: [ [Object] ] } } 
+ Fri Dec 08 2017 16:32:02 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:32:02.901Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-09T00:32:02.906Z] [rules] created ruleset projects/teamwatch-4f856/rulesets/ef9825d6-b433-404c-9062-2aa2ea766da4
+[info] i  hosting: preparing public directory for upload...
+[debug] [2017-12-09T00:32:03.514Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/teamwatch-4f856/uploads/-L-sfuISOFcQMNcZqzgF?fileCount=93&message=  
+ Fri Dec 08 2017 16:32:03 GMT-0800 (Pacific Standard Time)
+[debug] [2017-12-09T00:32:10.299Z] <<< HTTP RESPONSE 409
+[debug] [2017-12-09T00:32:10.299Z] <<< HTTP RESPONSE BODY undefined
+[debug] [2017-12-09T00:32:10.299Z] TypeError: Cannot read property 'error' of undefined
+    at module.exports (C:\Users\bryle\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:10:12)
+    at Request._callback (C:\Users\bryle\AppData\Roaming\npm\node_modules\firebase-tools\lib\api.js:43:25)
+    at Request.self.callback (C:\Users\bryle\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:186:22)
+    at emitTwo (events.js:106:13)
+    at Request.emit (events.js:191:7)
+    at Request.<anonymous> (C:\Users\bryle\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1163:10)
+    at emitOne (events.js:96:13)
+    at Request.emit (events.js:188:7)
+    at IncomingMessage.<anonymous> (C:\Users\bryle\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1085:12)
+    at IncomingMessage.g (events.js:291:16)
+[error] 
+[error] Error: An unexpected error has occurred.

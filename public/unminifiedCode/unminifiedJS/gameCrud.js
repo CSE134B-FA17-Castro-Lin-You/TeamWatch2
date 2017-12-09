@@ -5,10 +5,10 @@
 /*eslint no-undef: "error"*/
 /*eslint no-unused-vars: ["error", { "vars": "local", "args": "none" }]*/
 
-var id;
-var teamName;
+var id; //Used to store date and time of game schedule entry
+var teamName; //Used to store the opponent team's name
 
-
+/*Handles the functionality to add a game schedule entry to schedule*/
 function handleAddGame(){
   var gameType = document.getElementById("gameType").value.trim();
   var them = document.getElementById("addOpponentTeam").value.trim();
@@ -32,6 +32,7 @@ function handleAddGame(){
     
 }
 
+/*Handles permission upon loading the page*/
 function handleAccessGameSchedule(){
   var userId = localStorage.getItem("user");
   if(userId != null){
@@ -50,6 +51,7 @@ function handleAccessGameSchedule(){
   }
 }
 
+/*Saves game schedule entry changes to firebase*/
 function handleUpdate() {
   "use strict";
 
@@ -70,6 +72,7 @@ function handleUpdate() {
   }
 }
 
+/*Handles the population of the game schedule page*/
 function handleReadGame(){       
   var id = localStorage.getItem("user");
   if(id != null){
@@ -90,6 +93,7 @@ function handleReadGame(){
 }
 
 
+/*Handle the population of entries of the upcoming games page*/
 function handleReadUpcomingGame(date){       
   var id = localStorage.getItem("user");
   if(id != null){
@@ -109,7 +113,7 @@ function handleReadUpcomingGame(date){
   }          
 }
 
-
+/*Displays game schedule with edit functionality*/
 function handleReadAllowEdits(){
      var query = firebase.database().ref("Games").orderByKey();
      query.once("value").then(function(snapshot) {
@@ -133,6 +137,7 @@ function handleReadAllowEdits(){
   });
 }
 
+/*Displays game schedule with edit functionality*/
 function handleReadNoEdits(){
  var query = firebase.database().ref("Games").orderByKey();
   query.once("value").then(function(snapshot) {
@@ -156,6 +161,7 @@ function handleReadNoEdits(){
   });
 }
 
+/*Displays upcoming games with edit functionality*/
 function handleReadUpcomingAllowEdits(date){
   
   var query = firebase.database().ref("Games").orderByKey();
@@ -202,6 +208,7 @@ function handleReadUpcomingAllowEdits(date){
   });
 }
 
+/*Displays upcoming games with no edit functionality*/
 function handleReadUpcomingNoEdits(date){
  var query = firebase.database().ref("Games").orderByKey();
   query.once("value").then(function(snapshot) {
@@ -262,14 +269,14 @@ function handleDelete() {
 }
 
 
-
+/*save date and time of game*/
 function saveGame(objButton){
   var fired_button = objButton.value;
   localStorage.setItem("datetime", fired_button);
 }
 
 
-
+/*handles incrementing game counter for game schedule*/
 function handleViewGameSchedule(){
   document.addEventListener("DOMContentLoaded", function (event) {
     "use strict";
@@ -283,7 +290,7 @@ function handleViewGameSchedule(){
 }
 
 
-
+/*handles incrementing game counter for add game page*/
 function handleAddGamePage(){
   document.addEventListener("DOMContentLoaded", function (event) {
     "use strict";
@@ -296,7 +303,7 @@ function handleAddGamePage(){
   });
 }
 
-
+/*handles incrementing game counter for upcoming games*/
 function handleUpcoming(date){
   document.addEventListener("DOMContentLoaded", function (event) {
     "use strict";
